@@ -4,6 +4,9 @@ import logging
 import os
 
 
+pre_patched_value = http.client.print
+
+
 def set_httpclient_debuglevel() -> None:
     """if http-debuglevel > 0, debug messages in the
     http.client.HTTPConnection-class will be printed to STDOUT."""
@@ -22,9 +25,14 @@ def patch_httpclient_print() -> None:
 
 def unpatch_httpclient_print() -> None:
     """Unpatch the print-function used in http.client to use a log-call."""
-    http.client.print = print
+    http.client.print = pre_patched_value
 
 
 def configure() -> None:
+    """Configure the http.client.HTTPConnection-class
+
+    Configure this class to use the debuglevel from an environment-variable DEBUGLEVEL_HTTPCONNECTION
+    and to use a logger instead of a print-statements to output to standard output.
+    """
     set_httpclient_debuglevel()
     patch_httpclient_print()
