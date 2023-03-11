@@ -5,22 +5,23 @@
 import http.client
 import logging
 import os
-import urllib3
+
+import freezegun
 
 
 def test_httpclient_debuglevel():
-    from httpclient_logging.patch import set_http_debuglevel
+    from httpclient_logging.patch import set_httpclient_debuglevel
 
     # implicit default
     assert http.client.HTTPConnection.debuglevel == 0
 
     # explicit default
     os.environ["DEBUGLEVEL_HTTPCONNECTION"] = "0"
-    set_http_debuglevel()
+    set_httpclient_debuglevel()
     assert http.client.HTTPConnection.debuglevel == 0
 
     os.environ["DEBUGLEVEL_HTTPCONNECTION"] = "1"
-    set_http_debuglevel()
+    set_httpclient_debuglevel()
     assert http.client.HTTPConnection.debuglevel == 1
 
 
@@ -30,89 +31,80 @@ def test_configure():
     configure()
 
 
-def test_unpatched_httpclient_print(capsys):
-    from httpclient_logging.patch import set_http_debuglevel, patch_httpclient_print, unpatch_httpclient_print
+def test_unpatched_httpclient_print(capsys, debuglevel_1, http, url):
+    from httpclient_logging.patch import set_httpclient_debuglevel, unpatch_httpclient_print
 
-    os.environ["DEBUGLEVEL_HTTPCONNECTION"] = "1"
-    set_http_debuglevel()
-
-    assert http.client.HTTPConnection.debuglevel == 1
-
-    logging.basicConfig(
-        encoding="utf-8",
-        # format= '[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s',
-        # datefmt='%H:%M:%S',
-        level=logging.DEBUG,
-        format="%(asctime)s - %(name)s - %(levelname)-7s - %(message)s",
-        datefmt="%Y/%m/%d %H:%M:%S",
-    )
-
-    console = logging.StreamHandler()
-    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)-7s - %(message)s")
-    console.setFormatter(formatter)
-    console.setLevel(logging.DEBUG)
-
-    log = logging.getLogger()
-    log.addHandler(console)
+    set_httpclient_debuglevel()
 
     unpatch_httpclient_print()
-    pm = urllib3.PoolManager()
-    url = "http://webcode.me"
-    # breakpoint()
-    resp = pm.request("GET", url)
-    # captured = capsys.readouterr()
-    # assert "http.client - DEBUG   - reply:" in  captured.err
-    # assert captured.out == ""
 
-    # header: Server: nginx/1.6.2
-    # header: Date: Sat, 04 Mar 2023 01:21:17 GMT
-    # header: Content-Type: text/html
-    # header: Content-Length: 394
-    # header: Last-Modified: Sun, 23 Jan 2022 10:39:25 GMT
-    # header: Connection: keep-alive
-    # header: ETag: "61ed305d-18a"
-    # header: Access-Control-Allow-Origin: *
-    # header: Accept-Ranges: bytes
+    resp = http.request("GET", url, timeout=3)
+    # send: b'GET / HTTP/1.1\r\nHost: example.com\r\nAccept-Encoding: identity\r\nUser-Agent: python-urllib3/1.26.14\r\n\r\n'
+    # reply: 'HTTP/1.1 200 OK\r\n'
+    # header: Age: 407642
+    # header: Cache-Control: max-age=604800
+    # header: Content-Type: text/html; charset=UTF-8
+    # header: Date: Sat, 04 Mar 2023 10:20:18 GMT
+    # header: Etag: "3147526947+ident"
+    # header: Expires: Sat, 11 Mar 2023 10:20:18 GMT
+    # header: Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
+    # header: Server: ECS (dcb/7EA3)
+    # header: Vary: Accept-Encoding
+    # header: X-Cache: HIT
+    # header: Content-Length: 1256
+
+    captured = capsys.readouterr()
+    assert "send: b'GET / HTTP/1.1\\r\\nHost: example.com" in captured.out
+    assert "reply: 'HTTP/1.1 200 OK\\r\\n" in captured.out
+    assert "header: " in captured.out
+
+
+def test_patched_httpclient_print(debuglevel_1, http, url):
+    from httpclient_logging.patch import set_httpclient_debuglevel, patch_httpclient_print
+
+    set_httpclient_debuglevel()
+
+    # caplog.set_level(logging.DEBUG)
 
     patch_httpclient_print()
-    pm = urllib3.PoolManager()
-    url = "http://webcode.me"
-    resp = pm.request("GET", url)
-    # captured = capsys.readouterr()
-    # assert "http.client - DEBUG   - reply:" in  captured.err
-    # assert captured.out == ""
 
-    # 2023-03-04 02:22:02,527 - urllib3.connectionpool - DEBUG   - Starting new HTTP connection (1): webcode.me:80
-    # 2023-03-04 02:22:02,624 - urllib3.connectionpool - DEBUG   - http://webcode.me:80 "GET / HTTP/1.1" 200 394
-    # 2023-03-04 02:22:02,625 - urllib3.connectionpool - DEBUG   - Starting new HTTP connection (1): webcode.me:80
-    # 2023-03-04 02:22:02,685 - http.client - DEBUG   - send: b'GET / HTTP/1.1\r\nHost: webcode.me\r\nAccept-Encoding: identity\r\nUser-Agent: python-urllib3/1.26.14\r\n\r\n'
-    # 2023-03-04 02:22:02,725 - http.client - DEBUG   - reply: 'HTTP/1.1 200 OK\r\n'
-    # 2023-03-04 02:22:02,726 - http.client - DEBUG   - header: Server: nginx/1.6.2
-    # 2023-03-04 02:22:02,726 - http.client - DEBUG   - header: Date: Sat, 04 Mar 2023 01:21:17 GMT
-    # 2023-03-04 02:22:02,726 - http.client - DEBUG   - header: Content-Type: text/html
-    # 2023-03-04 02:22:02,727 - http.client - DEBUG   - header: Content-Length: 394
-    # 2023-03-04 02:22:02,727 - http.client - DEBUG   - header: Last-Modified: Sun, 23 Jan 2022 10:39:25 GMT
-    # 2023-03-04 02:22:02,727 - http.client - DEBUG   - header: Connection: keep-alive
-    # 2023-03-04 02:22:02,727 - http.client - DEBUG   - header: ETag: "61ed305d-18a"
-    # 2023-03-04 02:22:02,727 - http.client - DEBUG   - header: Access-Control-Allow-Origin: *
-    # 2023-03-04 02:22:02,727 - http.client - DEBUG   - header: Accept-Ranges: bytes
-    # 2023-03-04 02:22:02,727 - urllib3.connectionpool - DEBUG   - http://webcode.me:80 "GET / HTTP/1.1" 200 394
+    with freezegun.freeze_time("2023-01-01"):
+        resp = http.request("GET", url, timeout=3)
+    # 2023-03-04 11:24:17,109 - urllib3.connectionpool - DEBUG   - Starting new HTTP connection (1): example.com:80
+    # 2023-03-04 11:24:17,225 - http.client - DEBUG   - send: b'GET / HTTP/1.1\r\nHost: example.com\r\nAccept-Encoding: identity\r\nUser-Agent: python-urllib3/1.26.14\r\n\r\n'
+    # 2023-03-04 11:24:17,335 - http.client - DEBUG   - reply: 'HTTP/1.1 200 OK\r\n'
+    # 2023-03-04 11:24:17,337 - http.client - DEBUG   - header: Accept-Ranges: bytes
+    # 2023-03-04 11:24:17,338 - http.client - DEBUG   - header: Age: 167713
+    # 2023-03-04 11:24:17,338 - http.client - DEBUG   - header: Cache-Control: max-age=604800
+    # 2023-03-04 11:24:17,339 - http.client - DEBUG   - header: Content-Type: text/html; charset=UTF-8
+    # 2023-03-04 11:24:17,340 - http.client - DEBUG   - header: Date: Sat, 04 Mar 2023 10:24:20 GMT
+    # 2023-03-04 11:24:17,340 - http.client - DEBUG   - header: Etag: "3147526947"
+    # 2023-03-04 11:24:17,340 - http.client - DEBUG   - header: Expires: Sat, 11 Mar 2023 10:24:20 GMT
+    # 2023-03-04 11:24:17,341 - http.client - DEBUG   - header: Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
+    # 2023-03-04 11:24:17,341 - http.client - DEBUG   - header: Server: ECS (dcb/7FA3)
+    # 2023-03-04 11:24:17,342 - http.client - DEBUG   - header: Vary: Accept-Encoding
+    # 2023-03-04 11:24:17,342 - http.client - DEBUG   - header: X-Cache: HIT
+    # 2023-03-04 11:24:17,342 - http.client - DEBUG   - header: Content-Length: 1256
+    # 2023-03-04 11:24:17,343 - urllib3.connectionpool - DEBUG   - http://example.com:80 "GET / HTTP/1.1" 200 1256
+    # breakpoint()
 
-    # resp = pm.request('GET', url)
-    # captured = capsys.readouterr()
-    # assert captured.err == ""
-    # assert captured.out == ""
+    expected = [
+        "Starting new HTTP connection (1): example.com:80",
+        "send: b'GET / HTTP/1.1\\r\\nHost: example.com\\r\\nAccept-Encoding: identity\\r\\nUser-Agent: python-urllib3/1.26.14\\r\\n\\r\\n'",
+        "reply: 'HTTP/1.1 200 OK\\r\\n'",
+        "header: Accept-Ranges: bytes",
+        # "header: Age: 535549",
+        # "header: Cache-Control: max-age=604800",
+        "header: Content-Type: text/html; charset=UTF-8",
+        # "header: Date: Sat, 04 Mar 2023 10:38:06 GMT",
+        # 'header: Etag: "3147526947"',
+        # "header: Expires: Sat, 11 Mar 2023 10:38:06 GMT",
+        # "header: Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT",
+        "header: Server: ECS (dcb/7EEC)",
+        "header: Vary: Accept-Encoding",
+        "header: X-Cache: HIT",
+        "header: Content-Length: 1256",
+        'http://example.com:80 "GET / HTTP/1.1" 200 1256',
+    ]
 
-    # import requests
-
-    # url = "https://reqbin.com/echo/get/json"
-
-    # resp = requests.get(url,  headers={'Accept': 'application/json'})
-
-
-# def test_monkeypatch_httpclient_print():
-#     from httpclient_logging.patch import set_http_debuglevel, monkeypatch_httpclient_print
-
-#     os.environ["DEBUGLEVEL_HTTPCONNECTION"] = "1"
-#     set_http_debuglevel()
-#     monkeypatch_httpclient_print()
+    # assert caplog.messages == expected

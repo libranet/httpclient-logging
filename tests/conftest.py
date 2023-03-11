@@ -51,6 +51,11 @@ Usage:
 """
 
 import importlib
+import logging
+import os
+import urllib3
+
+import pytest
 
 import httpclient_logging
 
@@ -58,3 +63,45 @@ import httpclient_logging
 # this code has already been executed by sitecustomize
 importlib.reload(httpclient_logging)
 importlib.reload(httpclient_logging.patch)
+
+
+@pytest.fixture
+def debuglevel_0():
+    os.environ["DEBUGLEVEL_HTTPCONNECTION"] = "0"
+
+
+@pytest.fixture
+def debuglevel_1():
+    os.environ["DEBUGLEVEL_HTTPCONNECTION"] = "1"
+
+
+@pytest.fixture
+def http():
+    http_ = urllib3.PoolManager()
+    return http_
+
+
+@pytest.fixture
+def url():
+    return "http://example.com"
+
+
+@pytest.fixture
+def setup_logging():
+    logging.basicConfig(
+        encoding="utf-8",
+        # format= '[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s',
+        # datefmt='%H:%M:%S',
+        level=logging.DEBUG,
+        format="%(asctime)s - %(name)s - %(levelname)-7s - %(message)s",
+        datefmt="%Y/%m/%d %H:%M:%S",
+    )
+
+    console = logging.StreamHandler()
+    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)-7s - %(message)s")
+    console.setFormatter(formatter)
+    console.setLevel(logging.DEBUG)
+
+    log = logging.getLogger()
+    log.addHandler(console)
+    return log
