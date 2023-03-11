@@ -45,4 +45,4 @@ poetry-env-info:
 
 .PHONY: poetry-export-requirements  ## generate a requirements.txt-file
 poetry-export-requirements:
-	poetry export --format requirements.txt requirements.txt
+	poetry export --format requirements.txt --output requirements.txt
