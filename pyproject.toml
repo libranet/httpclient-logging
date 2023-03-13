@@ -72,6 +72,7 @@ name = "httpclient_logging"
 version = "0.0.0" # version managed by poetry-dynamic-versioning
 description = " python-package"
 readme = "docs/readme.rst"
+license = "MIT"
 authors = ["Wouter Vanden Hove <wouter@libranet.eu>"]
 maintainers = ["Wouter Vanden Hove <wouter@libranet.eu>"]
 repository = "https://github.com/libranet/httpclient_logging"
@@ -82,9 +83,12 @@ classifiers = [
     "Environment :: Console",
     "Framework :: Sitecustomize-entrypoints",
     "Intended Audience :: Developers",
-    "License :: Commercial",
+    "License :: MIT License",
     "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: Implementation :: CPython",
     "Typing :: Typed",
 ]
@@ -96,7 +100,6 @@ packages = [{ include = "httpclient_logging", from = "src" }]
 # These packages are mandatory and form the core of this package’s distribution.
 python = ">=3.9.0,<4.0"
 sitecustomize-entrypoints = ">=0.1.0"
-requests = "^2.28.2"
 
 [tool.poetry.group.dev.dependencies]
 black = { version = ">=22.1.0", allow-prereleases = true }
@@ -107,13 +110,6 @@ mypy = ">=0.931"
 pre-commit = ">=2.14.1"
 pre-commit-hooks = ">=4.1.0"
 pylint = ">=2.12.2"
-pytest-mock = "^3.10.0"
-
-[tool.poetry.group.test.dependencies]
-pytest = ">=7.0.1"
-pytest-cov = ">=3.0.0"
-pytest-mock = ">=3.10.0"
-
 
 [tool.poetry.group.docs.dependencies]
 Sphinx = ">=4.4.0"
@@ -121,6 +117,13 @@ sphinx-rtd-theme = ">=1.0.0"
 recommonmark = ">=0.7.1"
 sphinx-autoapi = ">=1.8.4"
 autoapi = ">=2.0.1"
+
+[tool.poetry.group.tests.dependencies]
+pytest = ">=7.0.1"
+pytest-catchlog = ">=1.2.2"
+pytest-cov = ">=3.0.0"
+pytest-freezegun = ">=0.4.2"
+pytest-mock = ">=3.10.0"
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/Libranet/httpclient_logging/issues"
@@ -141,7 +144,7 @@ files = ["src/*/__init__.py", "src/*/__version__.py", "docs/changes.rst"]
 [tool.poetry.plugins."sitecustomize"]
 # https://python-poetry.org/docs/pyproject/#plugins
 # https://github.com/Darsstar/sitecustomize-entrypoints/blob/main/src/sitecustomize/__init__.py
-httpclient_logging = "httpclient_logging:configure"
+httpclient_logging = "httpclient_logging.patch:configure"
 
 
 [tool.pylint.format]
