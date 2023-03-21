@@ -14,7 +14,6 @@ create-dirs:
 	mkdir -p var/cache ;\
 	mkdir -p var/cache/vscode ;\
 	mkdir -p var/log ;\
-	mkdir -p var/run ;\
 	mkdir -p var/tmp
 
 
@@ -34,7 +33,7 @@ poetry-update:
 
 
 .PHONY: poetry-build ## run poetry build to create the python-package
-poetry-install:
+poetry-build:
 	poetry build
 
 
