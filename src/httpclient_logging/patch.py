@@ -43,10 +43,6 @@ def configure() -> None:
     Configure this class to use the debuglevel from an environment-variable DEBUGLEVEL_HTTPCONNECTION
     and to use a logger instead of a print-statements to output to standard output.
     """
-    # import warnings
-
-    # warnings.warn("httpclient_logging.patch.configure ")
-
     set_httpclient_debuglevel()
     patch_httpclient_print()
 

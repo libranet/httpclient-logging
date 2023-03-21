@@ -20,10 +20,10 @@ include = '\.py$'          # regex -> single-quotes
 
 
 [tool.coverage.html]
-directory = "var/coverage/html" # relative to $CWD
+directory = "var/coverage/html"
 
 [tool.coverage.xml]
-output = "var/coverage/coverage.xml" # relative to $CWD
+output = "var/coverage/coverage.xml"
 
 
 [tool.coverage.report]
@@ -44,9 +44,9 @@ data_file = "var/coverage/coverage.db" # defaults to .coverage
 
 [tool.flake8]
 max_line_length = 140
-exclude = "bindings"
-# F401: imported but unused
-per_file_ignores = ["__init__.py:F401"]
+per_file_ignores = [
+    "__init__.py:F401", # F401: imported but unused
+]
 
 
 [tool.isort]
@@ -64,7 +64,6 @@ check_untyped_defs = true
 # disallow_untyped_defs = true
 exclude = "^bin/"
 ignore_missing_imports = true
-# mypy_path = ["./src", "./tests"]
 
 
 [tool.poetry]
@@ -106,7 +105,6 @@ black = { version = ">=22.1.0", allow-prereleases = true }
 flake8 = ">=4.0.1"
 flake8-pyproject = ">=1.2.2"
 isort = ">=5.10.1"
-mypy = ">=0.931"
 pre-commit = ">=2.14.1"
 pre-commit-hooks = ">=4.1.0"
 pylint = ">=2.12.2"
@@ -124,6 +122,9 @@ pytest-catchlog = ">=1.2.2"
 pytest-cov = ">=3.0.0"
 pytest-freezegun = ">=0.4.2"
 pytest-mock = ">=3.10.0"
+
+[tool.poetry.group.typing.dependencies]
+mypy = ">=0.931"
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/Libranet/httpclient_logging/issues"

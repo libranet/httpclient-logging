@@ -3,13 +3,19 @@ httpclient-logging
 
 .. toctree::
     :maxdepth: 2
-    :caption: About this package
 
-    introduction
     readme
     changes
-    contributors
+    security
     license
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Contribute
+
+    contributors
+    contributing
+    code-of-conduct
 
 .. toctree::
     :maxdepth: 2
