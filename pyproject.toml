@@ -119,7 +119,7 @@ sphinx-autoapi = ">=1.8.4"
 autoapi = ">=2.0.1"
 
 [tool.poetry.group.tests.dependencies]
-pytest = ">=7.0.1"
+pytest = ">=7.2.0"
 pytest-catchlog = ">=1.2.2"
 pytest-cov = ">=3.0.0"
 pytest-freezegun = ">=0.4.2"

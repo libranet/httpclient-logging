@@ -41,3 +41,6 @@
 
 # exclude generated python-files Byte-compiled / optimized / DLL files
 __pycache__/
+
+# makefile
+targets.log

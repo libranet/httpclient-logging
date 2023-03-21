@@ -1,7 +1,11 @@
 {
     // oh-my-posh uses special font (CaskaydiaCove) to display icons in the console
     "editor.fontFamily": "Consolas, 'Courier New', monospace,'DejaVu Sans Mono for Powerline','CaskaydiaCove NF'",
-    "makefile.extensionOutputFolder": "./.vscode", // folder must pre-exist?
+    "files.associations": {
+        ".env": "dotenv",
+        ".env.example": "dotenv"
+    },
+    "makefile.extensionOutputFolder": "./var/cache/vscode",
     "[makefile]": { // per-language config
         "editor.insertSpaces": false,
     },

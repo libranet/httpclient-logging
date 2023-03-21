@@ -17,9 +17,14 @@ formats:
   - htmlzip
   - pdf
 
+# this works
 python:
   install:
-    - method: pip
-      path: .
-      extra_requirements:
-        - docs
+    - requirements: docs/requirements.txt
+# autoapi not found
+# python:
+#   install:
+#     - method: pip
+#       path: .
+#       extra_requirements:
+#         - docs
