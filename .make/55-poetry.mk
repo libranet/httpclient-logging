@@ -5,6 +5,7 @@
 symlink-venv-dirs:
 	ln -sf .venv/bin ;\
 	ln -sf .venv/lib ;\
+	ln -sf .venv/lib64 ;\
 	ln -sf .venv/pyvenv.cfg
 
 
@@ -35,6 +36,16 @@ poetry-update:
 .PHONY: poetry-build ## run poetry build to create the python-package
 poetry-build:
 	poetry build
+
+
+.PHONY: poetry-check ## run poetry check on python-package
+poetry-check:
+	poetry check
+
+
+.PHONY: poetry-lock-check ## run poetry lock --check on python-package
+poetry-lock-check:
+	poetry lock --check
 
 
 .PHONY: poetry-env-info ## run env info

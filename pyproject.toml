@@ -118,6 +118,10 @@ recommonmark = ">=0.7.1"
 sphinx-autoapi = ">=1.8.4"
 autoapi = ">=2.0.1"
 
+[tool.poetry.group.ipython.dependencies]
+ipdb = ">=0.13.9"
+ipython = ">=8.4.0"
+
 [tool.poetry.group.tests.dependencies]
 pytest = ">=7.2.0"
 pytest-catchlog = ">=1.2.2"
