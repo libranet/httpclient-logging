@@ -3,7 +3,6 @@
 # pylint: disable=missing-function-docstring
 """Testing of module httpclient_logging.patch."""
 import http.client
-import logging
 import os
 
 import freezegun
@@ -38,7 +37,7 @@ def test_unpatched_httpclient_print(capsys, debuglevel_1, http, url):
 
     unpatch_httpclient_print()
 
-    resp = http.request("GET", url, timeout=3)
+    _ = http.request("GET", url, timeout=3)
     # send: b'GET / HTTP/1.1\r\nHost: example.com\r\nAccept-Encoding: identity\r\nUser-Agent: python-urllib3/1.26.14\r\n\r\n'
     # reply: 'HTTP/1.1 200 OK\r\n'
     # header: Age: 407642
@@ -69,7 +68,7 @@ def test_patched_httpclient_print(debuglevel_1, http, url):
     patch_httpclient_print()
 
     with freezegun.freeze_time("2023-01-01"):
-        resp = http.request("GET", url, timeout=3)
+        _ = http.request("GET", url, timeout=3)
     # 2023-03-04 11:24:17,109 - urllib3.connectionpool - DEBUG   - Starting new HTTP connection (1): example.com:80
     # 2023-03-04 11:24:17,225 - http.client - DEBUG   - send: b'GET / HTTP/1.1\r\nHost: example.com\r\nAccept-Encoding: identity\r\nUser-Agent: python-urllib3/1.26.14\r\n\r\n'
     # 2023-03-04 11:24:17,335 - http.client - DEBUG   - reply: 'HTTP/1.1 200 OK\r\n'

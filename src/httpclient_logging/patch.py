@@ -34,7 +34,7 @@ def patch_httpclient_print() -> None:
 
 def unpatch_httpclient_print() -> None:
     """Unpatch the print-function used in http.client to use a log-call."""
-    http.client.print = pre_patched_value
+    http.client.print = pre_patched_value  # type: ignore
 
 
 def configure() -> None:
