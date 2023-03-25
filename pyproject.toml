@@ -75,7 +75,7 @@ license = "MIT"
 authors = ["Wouter Vanden Hove <wouter@libranet.eu>"]
 maintainers = ["Wouter Vanden Hove <wouter@libranet.eu>"]
 repository = "https://github.com/libranet/httpclient_logging"
-documentation = "https://github.com/libranet/httpclient_logging"
+documentation = "https://httpclient-logging.readthedocs.io"
 keywords = ["entrypoints", "sitecustomize", "httpclient", "logging"]
 classifiers = [
     "Development Status :: 4 - Beta",
