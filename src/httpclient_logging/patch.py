@@ -27,13 +27,13 @@ def set_httpclient_debuglevel(debug_level=None) -> None:
 
 
 def patch_httpclient_print() -> None:
-    """Patch the print-function used in http.client to use a log-call."""
+    """Patch the print-function used in http.client to use a call to log.debug() instead."""
     log_http_client = logging.getLogger("http.client")
     http.client.print = lambda *args: log_http_client.debug(" ".join(args))  # type: ignore  # pragma: no cover
 
 
 def unpatch_httpclient_print() -> None:
-    """Unpatch the print-function used in http.client to use a log-call."""
+    """Unpatch the print-function used in http.client."""
     http.client.print = pre_patched_value  # type: ignore
 
 
