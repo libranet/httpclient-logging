@@ -94,7 +94,6 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
     "Typing :: Typed",
 ]
-
 packages = [{ include = "httpclient_logging", from = "src" }]
 
 
@@ -113,6 +112,7 @@ isort = ">=5.10.1"
 pre-commit = ">=2.14.1"
 pre-commit-hooks = ">=4.1.0"
 pylint = ">=2.12.2"
+ruff = ">=0.0.259"
 
 [tool.poetry.group.docs.dependencies]
 Sphinx = ">=4.4.0"
@@ -129,16 +129,20 @@ ipython = ">=8.4.0"
 importtime-waterfall = ">=1.0.0"
 tuna = ">=0.5.11"
 
-[tool.poetry.group.tests.dependencies]
+[tool.poetry.group.testing.dependencies]
+nox = ">=2022.11.21"
+nox-poetry = ">=1.0.2"
 pytest = ">=7.2.0"
-pytest-catchlog = ">=1.2.2"
 pytest-cov = ">=3.0.0"
-pytest-freezegun = ">=0.4.2"
+# pytest-freezegun = ">=0.4.2"  # superseded by pytest-freezer
+pytest-freezer = ">=0.4.6"
 pytest-mock = ">=3.10.0"
+tox = ">=4.4.8"
 
 [tool.poetry.group.typing.dependencies]
 lxml = { version = ">=4.9.2", optional = true, allow-prereleases = false } # mypy coverage-report
 mypy = ">=0.931"
+
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/Libranet/httpclient_logging/issues"
