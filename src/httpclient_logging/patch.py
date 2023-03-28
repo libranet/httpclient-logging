@@ -43,8 +43,15 @@ def configure() -> None:
     Configure this class to use the debuglevel from an environment-variable DEBUGLEVEL_HTTPCONNECTION
     and to use a logger instead of a print-statements to output to standard output.
     """
-    set_httpclient_debuglevel()
+    set_httpclient_debuglevel(debug_level=1)
     patch_httpclient_print()
+
+
+def undo() -> None:
+    """Undo the configured steps.
+    """
+    set_httpclient_debuglevel(debug_level=0)
+    unpatch_httpclient_print()
 
 
 def cancel():

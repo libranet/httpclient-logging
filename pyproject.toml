@@ -66,6 +66,10 @@ exclude = "^bin/"
 ignore_missing_imports = true
 
 
+[tool.nox]
+envdir = "var/cache/nox"
+
+
 [tool.poetry]
 name = "httpclient_logging"
 version = "0.0.0" # version managed by poetry-dynamic-versioning
