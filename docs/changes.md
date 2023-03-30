@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 
 - Refactored and renamed entrypoint into ``autoread_dotenv.entrypoint``.
 
-- Add boilerplate-files to comply with Github's [_Community Standards_](https://github.com/libranet/autoadd-bindir/community)
+- Add boilerplate-files to comply with Github's [_Community Standards_](https://github.com/libranet/httpclient-logging/community)
 
 - Test releasing via ``poetry-release``.
 
