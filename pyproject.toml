@@ -72,7 +72,7 @@ envdir = "var/cache/nox"
 
 [tool.poetry]
 name = "httpclient_logging"
-version = "0.0.0" # version managed by poetry-dynamic-versioning
+version = "1.0a0"
 description = " python-package"
 readme = "docs/readme.md"
 license = "MIT"
@@ -148,14 +148,14 @@ mypy = ">=0.931"
 "Bug Tracker" = "https://github.com/Libranet/httpclient_logging/issues"
 
 
-[tool.poetry-dynamic-versioning]
-# cfr https://github.com/mtkennerly/poetry-dynamic-versioning
-enable = true
-vcs = "git"
-style = "semver"
+# [tool.poetry-dynamic-versioning]
+# # cfr https://github.com/mtkennerly/poetry-dynamic-versioning
+# enable = true
+# vcs = "git"
+# style = "semver"
 
-[tool.poetry-dynamic-versioning.substitution]
-files = ["src/*/__init__.py", "src/*/__version__.py", "docs/changes.rst"]
+# [tool.poetry-dynamic-versioning.substitution]
+# files = ["src/*/__init__.py", "src/*/__version__.py", "docs/changes.md"]
 
 
 [tool.poetry.plugins] # Optional super table
