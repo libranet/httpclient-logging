@@ -1,6 +1,7 @@
 [![Testing](https://img.shields.io/github/actions/workflow/status/libranet/httpclient-logging/testing.yaml?branch=main&longCache=true&style=flat-square&label=tests&logo=GitHub%20Actions&logoColor=fff")](https://github.com/libranet/httpclient-logging/actions/workflows/testing.yaml)
 [![Linting](https://img.shields.io/github/actions/workflow/status/libranet/httpclient-logging/linting.yaml?branch=main&longCache=true&style=flat-square&label=linting&logo=GitHub%20Actions&logoColor=fff")](https://github.com/libranet/httpclient-logging/actions/workflows/linting.yaml)
 [![Read the Docs](https://readthedocs.org/projects/httpclient-logging/badge/?version=latest)](https://httpclient-logging.readthedocs.io/en/latest/)
+[![Codecov](https://codecov.io/gh/libranet/httpclient-logging/branch/main/graph/badge.svg?token=LYGLIDTNVX)](https://codecov.io/gh/libranet/httpclient-logging)
 [![PyPi Package](https://img.shields.io/pypi/v/httpclient-logging?color=%2334D058&label=pypi%20package)](https://pypi.org/project/httpclient-logging/)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/libranet/httpclient-logging/blob/main/docs/license.md)
 
