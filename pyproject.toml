@@ -186,10 +186,28 @@ log_cli_level = "NOTSET"
 filterwarnings = []
 markers = ["unit", "integration"]
 testpaths = ["tests"]
-
 # the junit-report is used to report coverage in gitlab
-# addopts = "--junit-xml='var/coverage/pytest.xml'"
 addopts = "--junit-xml='var/coverage/pytest.xml' --cov --cov-append "
+
+
+[tool.tox]
+# see https://tox.wiki/en/3.5.0/example/basic.html#pyproject-toml-tox-legacy-ini
+legacy_tox_ini = """
+[tox]
+envlist = py{39,310,311}
+# envlist = [py39, py310, py311]
+isolated_build = True
+toxworkdir = var/cache/tox
+
+[testenv]
+allowlist_externals =
+    make
+    poetry
+skip_install = true
+commands =
+    make install
+    pytest --pdb --exitfirst
+"""
 
 
 [tool.ruff]
