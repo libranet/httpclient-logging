@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## Unreleased (YYYY-MM-DD)
+
+- No changes yet.
+
+
 ## 1.0 (2023-03-30)
 
 - Refactored and renamed entrypoint into ``autoread_dotenv.entrypoint``.
