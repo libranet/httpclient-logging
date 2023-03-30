@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 
-## Unreleased (YYYY-MM-DD)
+## 1.0 (2023-03-30)
 
 - Refactored and renamed entrypoint into ``autoread_dotenv.entrypoint``.
 
@@ -14,9 +14,6 @@ All notable changes to this project will be documented in this file.
 - Convert docs from restructured text to markdown.
 
 - Update project-description in pyproject.toml. [WouterVH]
-
-
-## 1.0 (2023-03-09)
 
 - Add ``readthedocs.yaml``.
 

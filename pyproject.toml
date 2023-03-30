@@ -72,7 +72,7 @@ envdir = "var/cache/nox"
 
 [tool.poetry]
 name = "httpclient_logging"
-version = "1.0.2a0"
+version = "1.0.a0"
 description = " python-package"
 readme = "docs/readme.md"
 license = "MIT"
@@ -145,7 +145,8 @@ mypy = ">=0.931"
 
 
 [tool.poetry.urls]
-"Bug Tracker" = "https://github.com/Libranet/httpclient_logging/issues"
+Issues = "https://github.com/libranet/autoadd_bindir/issues"
+Changelog = "https://github.com/libranet/autoadd_bindir/releases"
 
 
 # [tool.poetry-dynamic-versioning]
@@ -165,6 +166,20 @@ mypy = ">=0.931"
 # https://github.com/Darsstar/sitecustomize-entrypoints/blob/main/src/sitecustomize/__init__.py
 httpclient_logging = "httpclient_logging.patch:configure"
 
+
+[tool.poetry-release]
+disable-dev = false
+disable-push = false
+disable-tag = false
+sign-commit = false
+sign-tag = false
+post-release-commit-message = "Start next development iteration {next_version}"
+release-commit-message = "Release {package_name} {version}"
+tag-name = "{version}"
+release-replacements = [
+    { file = "docs/changes.md", pattern = "Unreleased \\(YYYY-MM-DD\\)", replace = "{version} ({date})" },
+    { file = "src/autoadd_bindir/__init__.py", pattern = '__version__ = "{version}"', replace = '__version__ = "{next_version}"' },
+]
 
 [tool.pylint.format]
 max-line-length = 120
