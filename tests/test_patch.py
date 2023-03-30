@@ -23,7 +23,7 @@ def test_httpclient_debuglevel():
 
 
 def test_configure():
-    from httpclient_logging import configure
+    from httpclient_logging.patch import configure
 
     configure()
 
