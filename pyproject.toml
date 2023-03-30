@@ -72,7 +72,7 @@ envdir = "var/cache/nox"
 
 [tool.poetry]
 name = "httpclient_logging"
-version = "1.0"
+version = "1.0.1a0"
 description = " python-package"
 readme = "docs/readme.md"
 license = "MIT"
