@@ -11,13 +11,13 @@
 Install via pip:
 
 ```bash
-> bin/pip install httpclient_logging
+> bin/pip install httpclient-logging
 ```
 
 Or add to your poetry-based project:
 
 ```bash
-> poetry add httpclient_logging
+> poetry add httpclient-logging
 ```
 
 
