@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased (YYYY-MM-DD)
 
-- No changes yet.
+- Remove ``httpclient_logging.patch.cancel``-function, since this is now available in ``sitecustomize-entrypoints>=1.1.0``
+
+- Depend on ``sitecustomize-entrypoints>=1.1.0``
+-
+- Remove range-pinning ``python = ">=3.8.0,<4.0"``, only specify bottom-version ``">=3.8.0"``
+
+- Remove range-pinned dependencies ``tox``, ``nox`` that require us to pin ``python = "<4.0"``
 
 
 ## 1.0 (2023-03-30)

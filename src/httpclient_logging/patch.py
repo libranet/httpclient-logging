@@ -3,7 +3,6 @@ import http.client
 import logging
 import os
 
-
 pre_patched_value = print
 
 log = logging.getLogger(__name__)
@@ -48,12 +47,6 @@ def configure() -> None:
 
 
 def undo() -> None:
-    """Undo the configured steps.
-    """
+    """Undo the configured steps."""
     set_httpclient_debuglevel(debug_level=0)
     unpatch_httpclient_print()
-
-
-def cancel():
-    "Dummy function to cancel (override) the entrypoint-registration."
-    pass

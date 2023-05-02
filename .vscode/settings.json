@@ -30,4 +30,7 @@
         "-v",
         "${workspaceFolder}/tests/",
     ],
+    "yaml.customTags": [
+        "!env"
+    ]
 }
