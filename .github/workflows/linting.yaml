@@ -1,7 +1,7 @@
 name: Linting
 
 env:
-    POETRY_VERSION: "1.4.0"
+    POETRY_VERSION: "1.8.4"
 
 on:
     pull_request:
@@ -25,10 +25,10 @@ jobs:
                   persist-credentials: false
                   fetch-depth: 0
 
-            - name: Set up Python 3.11
+            - name: Set up Python 3.12
               uses: actions/setup-python@v4
               with:
-                  python-version: "3.11"
+                  python-version: "3.12"
 
             - name: Set up Poetry
               run: |
