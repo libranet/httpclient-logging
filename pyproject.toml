@@ -16,7 +16,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.black]
 include = '\.py$'  # regex -> single-quotes
 line-length = 120
-target-version = ["py310"]
+target-version = ["py312"]
 
 
 [tool.coverage.html]
