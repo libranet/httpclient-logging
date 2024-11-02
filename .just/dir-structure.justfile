@@ -1,6 +1,8 @@
-# See ../makefile
+# See ../justfile
 
-.PHONY: create-dirs ## initialize dir-structure, create dirs
+
+# initialize dir-structure, create dirs
+[group: 'dir-structure']
 create-dirs:
 	@echo -e "In current working dir: ${PWD}"
 	mkdir -p var ;\
@@ -10,7 +12,8 @@ create-dirs:
 	mkdir -p var/tmp
 
 
-.PHONY: symlink-venv-dirs ## symlinks to venv-dirs to make bin/python work
+# symlinks to venv-dirs to make bin/python work
+[group: 'dir-structure']
 symlink-venv-dirs:
 	ln -sf ${VENV_DIR}/bin ;\
 	ln -sf ${VENV_DIR}/lib ;\
