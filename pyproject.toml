@@ -85,6 +85,9 @@ profiling = [
     "importtime-waterfall >= 1.0.0",
     "tuna >= 0.5.11",
     ]
+releasing = [
+    "pyroma>=4.0",
+]
 security = [
     "bandit >= 0.0",
     ]
@@ -99,6 +102,7 @@ typing = [
     "lxml >=4.9",
     "mypy >= 1.13.0",
     ]
+
 
 # https://packaging.python.org/en/latest/guides/creating-and-discovering-plugins/
 # https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#advanced-plugins
@@ -225,6 +229,7 @@ default-groups = [
     "ipython",
     "linting",
     # "profiling",
+    "releasing",
     "testing",
     "typing",
     # "security",
