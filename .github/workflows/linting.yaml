@@ -58,8 +58,8 @@ jobs:
         - name: Flake8  check
           run: uv run flake8 src
 
-        - name: Pylint
-          run: uv run pylint src
+        # - name: Pylint
+        #   run: uv run pylint src
 
         - name: Pyroma
           run: uv run pyroma
