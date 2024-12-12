@@ -13,50 +13,101 @@ on:
 permissions:
     contents: read
 
+strategy:
+    matrix:
+        python-version:
+        - "3.8"
+        - "3.9"
+        - "3.10"
+        - "3.11"
+        - "3.12"
+
 jobs:
+    # see https://docs.astral.sh/uv/guides/integration/github/
     run-tests:
         name: Python linters
         runs-on: ubuntu-latest
-        timeout-minutes: 5
 
         steps:
-            - uses: actions/checkout@v3
-              with:
-                  persist-credentials: false
-                  fetch-depth: 0
+        - uses: actions/checkout@v4
 
-            - name: Set up Python 3.12
-              uses: actions/setup-python@v4
-              with:
-                  python-version: "3.12"
+        - name: Install uv
+          uses: astral-sh/setup-uv@v4
 
-            - name: Set up Poetry
-              run: |
-                  pip install poetry==${{ env.POETRY_VERSION }}
+        # - name: Set up Python
+        #   run: uv python install
 
-            - name: Install
-              run: |
-                  just install
+        # - name: "Set up Python"
+        #   uses: actions/setup-python@v5
+        #   with:
+        #       python-version-file: ".python-version"
 
-            - name: Flake8
-              run: |
-                  just flake8
+        # - name: "Set up Python"
+        #   uses: actions/setup-python@v5
+        #   with:
+        #       python-version-file: "pyproject.toml"
 
-            - name: Ruff
-              run: |
-                  just ruff-check
+        - name: Set up Python ${{ matrix.python-version }}
+          run: uv python install ${{ matrix.python-version }}
 
-            - name: Pylint
-              run: |
-                  just pylint
+        - name: Install the project
+          run: uv sync --all-extras --dev
 
-            - name: Mypy
-              run: |
-                  just mypy
+        - name: Ruff check
+          run: uv run ruff check .
 
-            - name: Pyroma
-              run: |
-                  just pyroma
+        - name: Flake8  check
+          run: uv run flake8 .
+        - name: Pylint
+          run: uv run pylint
+
+        - name: Pyroma
+          run: uv run pyroma
+
+# jobs:
+#     run-tests:
+#         name: Python linters
+#         runs-on: ubuntu-latest
+#         timeout-minutes: 5
+
+#         steps:
+#             - uses: actions/checkout@v3
+#               with:
+#                   persist-credentials: false
+#                   fetch-depth: 0
+
+#             - name: Set up Python 3.12
+#               uses: actions/setup-python@v4
+#               with:
+#                   python-version: "3.12"
+
+#             - name: Set up Poetry
+#               run: |
+#                   pip install poetry==${{ env.POETRY_VERSION }}
+
+#             - name: Install
+#               run: |
+#                   just install
+
+#             - name: Flake8
+#               run: |
+#                   just flake8
+
+#             - name: Ruff
+#               run: |
+#                   just ruff-check
+
+#             - name: Pylint
+#               run: |
+#                   just pylint
+
+#             - name: Mypy
+#               run: |
+#                   just mypy
+
+#             - name: Pyroma
+#               run: |
+#                   just pyroma
 
             # - name: Check poetry
             #   run: |
