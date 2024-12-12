@@ -13,21 +13,20 @@ on:
 permissions:
     contents: read
 
-strategy:
-    matrix:
-        python-version:
-        - "3.8"
-        - "3.9"
-        - "3.10"
-        - "3.11"
-        - "3.12"
 
 jobs:
     # see https://docs.astral.sh/uv/guides/integration/github/
     run-tests:
         name: Python linters
         runs-on: ubuntu-latest
-
+        strategy:
+            matrix:
+                python-version:
+                - "3.8"
+                - "3.9"
+                - "3.10"
+                - "3.11"
+                - "3.12"
         steps:
         - uses: actions/checkout@v4
 
