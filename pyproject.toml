@@ -206,10 +206,12 @@ commands =
 # https://beta.ruff.rs/docs/configuration/
 # https://github.com/pandas-dev/pandas/blob/main/pyproject.toml
 cache-dir = "var/cache/ruff"
+line-length = 120
+
+[tool.ruff.lint]
 ignore = [
     "B011", # B011 Do not call assert False since python -O removes these calls.
 ]
-line-length = 120
 
 [tool.uv.workspace]
 members = ["var/tmp/demo-uv"]

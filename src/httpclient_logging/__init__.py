@@ -2,4 +2,6 @@
 __version__ = "1.0"
 __copyright__ = "Copyright 2023 Libranet - MIT License."
 
-import httpclient_logging.patch
+from httpclient_logging import patch
+
+__all__ = ["patch"]
