@@ -62,7 +62,7 @@ jobs:
         #   run: uv run pylint src
 
         - name: Pyroma
-          run: uv run pyroma
+          run: uv run pyroma .
 
 # jobs:
 #     run-tests:
