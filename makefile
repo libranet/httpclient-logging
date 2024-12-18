@@ -23,4 +23,4 @@ PROJECT_NAME='httpclient-logging'
 
 
 .PHONY: install  ## full initial installation
-install: create-dirs symlink-venv-dirs dotenv-install poetry-install
+install: create-dirs symlink-venv-dirs dotenv-install uv-create-venv uv-pip-install
