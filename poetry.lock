@@ -102,13 +102,13 @@ sphinx = "*"
 
 [[package]]
 name = "autoread-dotenv"
-version = "1.0.2"
+version = "1.0.3"
 description = "Automatically set env-vars at the beginning of every python-process in your in-project virtualenv."
 optional = false
 python-versions = ">=3.8.0"
 files = [
-    {file = "autoread_dotenv-1.0.2-py3-none-any.whl", hash = "sha256:745d3ca5d33714d34ee1993cb2947d8d90c573c5688e911f38a6f38057259d08"},
-    {file = "autoread_dotenv-1.0.2.tar.gz", hash = "sha256:fbc25cbad12d9991825037741bba8a2b748eb7df7c52d99f9eb0e91885a72d73"},
+    {file = "autoread_dotenv-1.0.3-py3-none-any.whl", hash = "sha256:cd7292b178b2e65c4611fd872b720612997b19ece909b62e3dd3565d9e560c0a"},
+    {file = "autoread_dotenv-1.0.3.tar.gz", hash = "sha256:809f2be634cd8e998e23d90829e615d2798f66ac1b36b5794d701fcce6b2a094"},
 ]
 
 [package.dependencies]
