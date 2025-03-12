@@ -35,15 +35,11 @@ set fallback
 set windows-shell := ["pwsh.exe", "-NoLogo", "-Command"]
 set shell := ["bash", "-uc"]
 
-import '.just/black.justfile'
 import '.just/dir-structure.justfile'
 import '.just/dotenv.justfile'
-import '.just/flake8.justfile'
 import '.just/git.justfile'
 import '.just/ipython.justfile'
-import '.just/isort.justfile'
 import '.just/mypy.justfile'
-import '.just/nox.justfile'
 import '.just/pre-commit.justfile'
 import '.just/pylint.justfile'
 import '.just/pyroma.justfile'
@@ -51,7 +47,6 @@ import '.just/pytest.justfile'
 import '.just/readthedocs.justfile'
 import '.just/ruff.justfile'
 import '.just/sphinx.justfile'
-import '.just/tox.justfile'
 import '.just/uv.justfile'
 
 # Help target
