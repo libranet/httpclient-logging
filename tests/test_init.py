@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 # pylint: disable=import-outside-toplevel
 # pylint: disable=missing-function-docstring
 """Testing of module httpclient_logging.__init__."""
+
 import packaging.version
 
 

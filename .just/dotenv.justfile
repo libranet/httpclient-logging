@@ -1,9 +1,9 @@
 # See ../makefile
 
-# Source .env.example, because .env might not yet exist.
-# -include .env.example
+# Source .env.template, because .env might not yet exist.
+# -include .env.template
 
-# Source .env, if it exists. This Overrides any env-vars sourced in .env.example.
+# Source .env, if it exists. This Overrides any env-vars sourced in .env.template.
 # -include .env
 
 
@@ -12,8 +12,8 @@
 # safest way, is to not overwrite existing .env-files, manual intervention needed.
 [group: 'dotenv']
 dotenv-install-from-example:
-	@echo -e "Copying .env.example to .env" ;\
-	cp -n .env.example .env ;\
+	@echo -e "Copying .env.template to .env" ;\
+	cp -n .env.template .env ;\
 	echo "Please review any credentials in the .env-file."
 
 
@@ -24,6 +24,6 @@ dotenv-set-basedir:
 	$(SED) -i 's@__CWD__@'"$(PWD)"'@'  .env
 
 
-# install .env-file from .env.example
+# install .env-file from .env.template
 [group: 'dotenv']
 dotenv-install: dotenv-install-from-example dotenv-set-basedir
