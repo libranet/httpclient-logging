@@ -45,7 +45,7 @@ Module Contents
 
 .. py:data:: log
 
-.. py:function:: set_httpclient_debuglevel(debug_level = '0')
+.. py:function:: set_httpclient_debuglevel(debuglevel = '0')
 
    Set debug-level for http.client.
 

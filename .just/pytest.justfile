@@ -1,42 +1,56 @@
-# See ../justfile
+# pytest
 
 
-# show which pytest is used
+# run pytest
 [group: 'pytest']
-pytest-which:
-	@ which pytest
+pytest args="":
+    .venv/bin/pytest tests {{args}}
 
 
-# run pytest on python-files
+# run pytest with markers
 [group: 'pytest']
-pytest:
-	- pytest tests
+pytest-marked markers="" args="":
+    .venv/bin/pytest tests -m '{{markers}}' {{args}}
 
 
-# run pytest on python-files with the --pdb-flag
+# run pytest with coverage
 [group: 'pytest']
-pytest-pdb:
-	- pytest tests --pdb
+pytest-coverage args="":
+    .venv/bin/pytest --color=yes --cov=httpclient_logging --cov-fail-under=90 --cov-report html:var/coverage/html --cov-report xml:var/coverage/pytest-cobertura.xml --cov-report term-missing {{args}}
+
+alias pytest-cov := pytest-coverage
 
 
-# run pytest and generate html-coverage --pdb-flag
+# run pytest with coverage
 [group: 'pytest']
-pytest-cov:
-	- pytest tests --cov=src --cov-report html  --cov-report xml --cov-report term  -v
+pytest-coverage-azure args="":
+     .venv/bin/pytest tests --color=yes --cov=httpclient_logging --cov-fail-under=5 --cov-report html:var/coverage/html --cov-report xml:var/coverage/pytest-cobertura.xml --cov-report term-missing --junit-xml='var/coverage/pytest-junit.xml' --nunit-xml='var/coverage/pytest-nunit.xml' {{args}}
 
+alias pytest-cov-azure := pytest-coverage-azure
 
-# run pytest with the --pdb-flag and generate html-coverage
+# run pytest with pdb
 [group: 'pytest']
-pytest-pdb-cov:
-	- pytest tests --cov=src --cov-report html  --cov-report xml --cov-report term  -v  --pdb
+pytest-pdb args="":
+    .venv/bin/pytest tests --color=yes --pdb -v {{args}}
 
 
-# run pytest with the --pdb-flag and generate html-coverage
+# run pytest with last-failed
 [group: 'pytest']
-pytest-cov-pdb: pytest-pdb-cov
+pytest-failed args="":
+    .venv/bin/pytest tests --color=yes --lf {{args}}
+
+alias pytest-lf := pytest-failed
 
 
-# run pytest with the --pdb-flag and generate html-coverage on last failed tests
+# run pytest with pdb + last-failed
 [group: 'pytest']
-pytest-pdb-cov-lf:
-	- pytest tests --cov=src --cov-report html -v --pdb --lf
+pytest-pdb-failed args="":
+    .venv/bin/pytest tests --color=yes --pdb --lf {{args}}
+
+alias pytest-lf-pdf := pytest-pdb-failed
+
+
+# run pytest with filter
+[group: 'pytest']
+pytest-filter filter args="":
+    .venv/bin/pytest tests --color=yes -k {{filter}} {{args}}

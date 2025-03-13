@@ -65,17 +65,50 @@ importlib.reload(httpclient_logging.patch)
 
 
 @pytest.fixture
+def default_httpclient():
+    from httpclient_logging.patch import undo
+
+    undo()
+
+
+@pytest.fixture
 def debuglevel_0():
+    # Save the original value of the environment variable
+    original_value = os.environ.get("DEBUGLEVEL_HTTPCONNECTION")
+
+    # Set the environment variable to "0"
     os.environ["DEBUGLEVEL_HTTPCONNECTION"] = "0"
+
+    # Yield control to the test
+    yield
+
+    # After the test, restore the original value
+    if original_value is None:
+        del os.environ["DEBUGLEVEL_HTTPCONNECTION"]
+    else:
+        os.environ["DEBUGLEVEL_HTTPCONNECTION"] = original_value
 
 
 @pytest.fixture
 def debuglevel_1():
+    # Save the original value of the environment variable
+    original_value = os.environ.get("DEBUGLEVEL_HTTPCONNECTION")
+
+    # Set the environment variable to "1"
     os.environ["DEBUGLEVEL_HTTPCONNECTION"] = "1"
+
+    # Yield control to the test
+    yield
+
+    # After the test, restore the original value
+    if original_value is None:
+        del os.environ["DEBUGLEVEL_HTTPCONNECTION"]
+    else:
+        os.environ["DEBUGLEVEL_HTTPCONNECTION"] = original_value
 
 
 @pytest.fixture
-def http():
+def http_manager():
     http_ = urllib3.PoolManager()
     return http_
 

@@ -36,8 +36,16 @@ The only thing left to do for you is the create a ``.env`` in the root of your p
 
 ## Registered sitecustomize-entrypoint
 
+
 The ``httpclient_logging.entrypoint``-function is registered as a ``sitecustomize``-entrypoint in our pyproject.toml_:
 
+via uv:
+``` toml
+    [project.entry-points."sitecustomize"]
+    httpclient_logging = "httpclient_logging.patch:configure"
+```
+
+via poetry:
 ``` toml
     [tool.poetry.plugins]
     [tool.poetry.plugins."sitecustomize"]

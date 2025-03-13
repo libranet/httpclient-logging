@@ -17,3 +17,9 @@ def test_copyright():
 
     assert isinstance(__copyright__, str)
     assert "Copyright" in __copyright__
+
+
+def test_metadata():
+    from httpclient_logging import __metadata__
+
+    assert isinstance(__metadata__, dict)

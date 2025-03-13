@@ -26,11 +26,7 @@ __description__: str | list[str] = pkginfo.get("summary", "unknown")
 
 __license__: str | list[str] = pkginfo.get("license", "unknown")
 
-__pkg_name__: str | list[str] = pkginfo.get("name", "unknown")
-
 __readme__: str | list[str] = pkginfo.get("description", "unknown")
-
-__title__ = __package__
 
 __url__: str | list[str] = pkginfo.get("project_url", "unknown")
 

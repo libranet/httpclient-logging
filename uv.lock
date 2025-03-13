@@ -401,6 +401,7 @@ security = [
     { name = "bandit" },
 ]
 testing = [
+    { name = "freezegun" },
     { name = "pytest" },
     { name = "pytest-cov" },
     { name = "pytest-freezer" },
@@ -443,6 +444,7 @@ profiling = [
 releasing = [{ name = "pyroma", specifier = ">=4.0" }]
 security = [{ name = "bandit", specifier = ">=0.0" }]
 testing = [
+    { name = "freezegun", specifier = ">=1.5.1" },
     { name = "pytest", specifier = ">=8.3.3" },
     { name = "pytest-cov", specifier = ">=5.0.0" },
     { name = "pytest-freezer", specifier = ">=0.4.8" },
