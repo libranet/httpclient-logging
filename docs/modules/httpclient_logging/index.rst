@@ -1,5 +1,5 @@
-:py:mod:`httpclient_logging`
-============================
+httpclient_logging
+==================
 
 .. py:module:: httpclient_logging
 
@@ -11,50 +11,29 @@
 
 Submodules
 ----------
+
 .. toctree::
-   :titlesonly:
    :maxdepth: 1
 
-   patch/index.rst
+   /modules/httpclient_logging/_version/index
+   /modules/httpclient_logging/patch/index
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   httpclient_logging.__copyright__
+   httpclient_logging.__version__
 
 
 Package Contents
 ----------------
 
-
-Functions
-~~~~~~~~~
-
-.. autoapisummary::
-
-   httpclient_logging.configure
-
-
-
-Attributes
-~~~~~~~~~~
-
-.. autoapisummary::
-
-   httpclient_logging.__version__
-   httpclient_logging.__copyright__
-
+.. py:data:: __copyright__
+   :type:  str | list[str]
 
 .. py:data:: __version__
-   :value: '0.0.0'
-
-
-
-.. py:data:: __copyright__
-   :value: 'Copyright 2023 Libranet - MIT License.'
-
-
-
-.. py:function:: configure()
-
-   Configure the http.client.HTTPConnection-class
-
-   Configure this class to use the debuglevel from an environment-variable DEBUGLEVEL_HTTPCONNECTION
-   and to use a logger instead of a print-statements to output to standard output.
-
+   :type:  str | list[str]
 

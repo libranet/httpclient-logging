@@ -58,4 +58,4 @@ uv-export-requirements:
 # generate a requirements.txt-file for readthedocs
 [group: 'uv']
 uv-export-requirements-docs:
-	uv export --format requirements.txt --only-group docs --without-hashes --output docs/requirements.txt
+	uv export --format requirements-txt --only-group docs --no-hashes --output-file docs/requirements.txt

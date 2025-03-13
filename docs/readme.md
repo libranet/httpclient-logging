@@ -8,13 +8,21 @@
 
 ## Installation
 
+
+
 Install via pip:
 
 ```bash
 > bin/pip install httpclient-logging
 ```
 
-Or add to your poetry-based project:
+Install via uv:
+
+```bash
+> uv add httpclient-logging
+```
+
+Install via poetry:
 
 ```bash
 > poetry add httpclient-logging
@@ -45,7 +53,7 @@ For more information, please see [sitecustomize-entrypoints](http://pypi.python.
  [![Python Version](https://img.shields.io/pypi/pyversions/httpclient-logging?:alt:PyPI-PythonVersion)](https://pypi.org/project/httpclient-logging/)
  [![PyPI - Implementation](https://img.shields.io/pypi/implementation/httpclient-logging?:alt:PyPI-Implementation)](https://pypi.org/project/httpclient-logging/)
 
-``httpclient-logging``  works on Python 3.8+, including PyPy3. Tested until Python 3.11,
+``httpclient-logging``  works on Python 3.8+, including PyPy3. Tested until Python 3.13,
 
 
 ## Notable dependencies
