@@ -3,13 +3,14 @@
 import http.client
 import logging
 import os
+import typing as tp
 
 pre_patched_value = print
 
 log = logging.getLogger(__name__)
 
 
-def set_httpclient_debuglevel(debuglevel: int | str | None = None) -> None:
+def set_httpclient_debuglevel(debuglevel: tp.Union[int, str, None] = None) -> None:  # noqa: UP007
     """Set debug-level for http.client.
 
     If http-debuglevel > 0, debug messages in the http.client.HTTPConnection-class will be printed to STDOUT.

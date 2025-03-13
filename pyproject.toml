@@ -21,7 +21,7 @@ build-backend = "hatchling.build"
 [project]
 name = "httpclient_logging"
 version = "1.1"
-requires-python = ">=3.9"
+requires-python = ">=3.8"
 description = " python-package"
 readme = "docs/readme.md"
 # license = "MIT"
