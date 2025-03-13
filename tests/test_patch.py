@@ -1,6 +1,7 @@
 # pylint: disable=import-outside-toplevel
 # pylint: disable=missing-function-docstring
 """Testing of module httpclient_logging.patch."""
+
 import http.client
 import os
 

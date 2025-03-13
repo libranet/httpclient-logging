@@ -37,11 +37,11 @@ Attributes
 
 .. py:data:: pre_patched_value
 
-   
+
 
 .. py:data:: log
 
-   
+
 
 .. py:function:: set_httpclient_debuglevel(debug_level=None)
 

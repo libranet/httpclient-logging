@@ -43,12 +43,12 @@ Attributes
 .. py:data:: __version__
    :value: '0.0.0'
 
-   
+
 
 .. py:data:: __copyright__
    :value: 'Copyright 2023 Libranet - MIT License.'
 
-   
+
 
 .. py:function:: configure()
 
