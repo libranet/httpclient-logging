@@ -10,8 +10,8 @@
 # character.
 #
 # Usage with uv:
-#   > uv venv
-#   > uv pip install .
+#   > uv sync --all-groups
+
 
 [build-system]
 requires = ["hatchling"]
@@ -20,11 +20,12 @@ build-backend = "hatchling.build"
 
 [project]
 name = "httpclient_logging"
-version = "1.0.1a0"
+version = "1.1"
 requires-python = ">=3.10"
 description = " python-package"
 readme = "docs/readme.md"
-license = "MIT"
+# license = "MIT"
+license = { file = "license.md" }
 authors = [{name = "Wouter Vanden Hove", email = "wouter@libranet.eu"}]
 maintainers = [{name = "Wouter Vanden Hove", email = "wouter@libranet.eu"}]
 keywords = ["entrypoints", "sitecustomize", "httpclient", "logging"]
@@ -34,6 +35,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.10",
@@ -42,7 +44,6 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
     "Typing :: Typed",
 ]
-# packages = [{ include = "httpclient_logging", from = "src" }]
 dependencies = [
     "sitecustomize-entrypoints == 1.1.0",
 ]
@@ -60,22 +61,17 @@ dev = [
     "libranet-logging >= 1.0",
     ]
 docs = [
+    "autoapi >= 2.0.1",
+    "recommonmark >= 0.7.1",
     "sphinx >= 7.1.2",
     "sphinx-rtd-theme >= 3.0.1",
-    "recommonmark >= 0.7.1",
     "sphinx-autoapi >= 3.3.3",
-    "autoapi >= 2.0.1",
     ]
 ipython = [
     "ipdb >= 0.13.13",
     "ipython >= 8.12.3",
     ]
 linting = [
-    "black >= 24.8.0",
-    "flake8 >= 5.0.4",
-    "flake8-bugbear >= 23.3.12",
-    "flake8-pyproject >= 1.2.3",
-    "isort >= 5.13.2",
     "pre-commit >= 3.5.0",
     "pre-commit-hooks >= 5.0.0",
     "pylint >= 3.2.7",
@@ -92,7 +88,7 @@ security = [
     "bandit >= 0.0",
     ]
 testing = [
-    "nox >= 2024.10.9",
+    # "nox >= 2024.10.9",
     "pytest >= 8.3.3",
     "pytest-cov >= 5.0.0",
     "pytest-freezer >= 0.4.8",
@@ -109,12 +105,6 @@ typing = [
 # https://github.com/Darsstar/sitecustomize-entrypoints/blob/main/src/sitecustomize/__init__.py
 [project.entry-points."sitecustomize"]
 httpclient_logging = "httpclient_logging.patch:configure"
-
-
-[tool.black]
-include = '\.py$'  # regex -> single-quotes
-line-length = 120
-target-version = ["py312"]
 
 
 [tool.coverage.html]
@@ -139,18 +129,6 @@ include = ["src/*"]
 branch = true
 data_file = "var/coverage/coverage.db" # defaults to .coverage
 
-[tool.flake8]
-max_line_length = 140
-per_file_ignores = [
-    "__init__.py:F401", # F401: imported but unused
-]
-
-[tool.isort]
-line_length = 120             # corresponds to -w  flag
-multi_line_output = 3         # corresponds to -m  flag
-include_trailing_comma = true # corresponds to -tc flag
-skip_glob = '^((?!py$).)*$'   # isort all Python files
-known_third_party = []
 
 [tool.mypy]
 # cfr https://mypy.readthedocs.io/en/stable/config_file.html#using-a-pyproject-toml-file
@@ -159,9 +137,6 @@ check_untyped_defs = true
 # disallow_untyped_defs = true
 exclude = "^bin/"
 ignore_missing_imports = true
-
-[tool.nox]
-envdir = "var/cache/nox"
 
 
 [tool.pylint.format]
@@ -187,38 +162,43 @@ testpaths = ["tests"]
 # the junit-report is used to report coverage in gitlab
 addopts = "--junit-xml='var/coverage/pytest.xml' --cov --cov-append "
 
-[tool.tox]
-# see https://tox.wiki/en/3.5.0/example/basic.html#pyproject-toml-tox-legacy-ini
-legacy_tox_ini = """
-[tox]
-envlist = py{39,310,311}
-# envlist = [py39, py310, py311]
-isolated_build = True
-toxworkdir = var/cache/tox
-
-[testenv]
-allowlist_externals =
-    make
-    poetry
-skip_install = true
-commands =
-    make install
-    pytest --pdb --exitfirst
-"""
 
 [tool.ruff]
 # https://beta.ruff.rs/docs/configuration/
 # https://github.com/pandas-dev/pandas/blob/main/pyproject.toml
 cache-dir = "var/cache/ruff"
 line-length = 120
+target-version = "py312"
 
 [tool.ruff.lint]
+select = ["ALL"]
 ignore = [
-    "B011", # B011 Do not call assert False since python -O removes these calls.
+    "B011",   # Do not call assert False since python -O removes these calls.
+    "ERA001", # Found commented-out code
+    "G004",   # Logging statement uses f-string
+    "RET504", # Unnecessary assignment before `return` statement
+
+    # D212 conflicts with D213 - we prefer D212, so we ignore D213
+    "D213",  # Multi-line docstring summary should start at the second line
+
+    # D203 conflicts with D211 - we prefer D203, so we ignore D211
+    "D203", # 1 blank line required before class docstring
+    # "D211", # No blank lines allowed before class docstring
+
+    # warning: `incorrect-blank-line-before-class` (D203) and `no-blank-line-before-class` (D211) are incompatible. Ignoring `incorrect-blank-line-before-class`.
 ]
 
-[tool.uv.workspace]
-members = ["var/tmp/demo-uv"]
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [
+    "ANN",    # Missing type annotations
+    "ARG002", # Unused method argument: `time_series`
+    "D",      # Missing docstring
+    "E501",   # Line too long
+    "INP001", # tests-dir should not be a python-package
+    "NPY002", # TODO Replace legacy `np.random.rand` call with `np.random.Generator`
+    "SLF001", # Private member accessed
+    "S101",   # Use of `assert` detected
+    ]
 
 
 [tool.uv]

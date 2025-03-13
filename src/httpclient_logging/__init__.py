@@ -1,8 +1,10 @@
 """httpclient_logging.__init__."""
 
-__version__ = "1.0"
-__copyright__ = "Copyright 2023 Libranet - MIT License."
-
 from httpclient_logging import patch
+from httpclient_logging._version import __copyright__, __version__
 
-__all__ = ["patch"]
+__all__ = [
+    "__copyright__",
+    "__version__",
+    "patch",
+]

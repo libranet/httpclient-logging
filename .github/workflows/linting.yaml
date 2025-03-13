@@ -1,8 +1,5 @@
 name: Linting
 
-# env:
-#     POETRY_VERSION: "1.8.4"
-
 on:
     pull_request:
         types: [opened, reopened, synchronize]
@@ -19,6 +16,7 @@ jobs:
     run-tests:
         name: Python linters
         runs-on: ubuntu-latest
+        timeout-minutes: 5
         strategy:
             matrix:
                 python-version:
@@ -30,24 +28,14 @@ jobs:
                 - "3.13"
         steps:
         - uses: actions/checkout@v4
+          with:
+              persist-credentials: false
+              fetch-depth: 0
 
         - name: Install the latest version of uv
           uses: astral-sh/setup-uv@v5
           with:
-            version: "latest"
-
-        # - name: Set up Python
-        #   run: uv python install
-
-        # - name: "Set up Python"
-        #   uses: actions/setup-python@v5
-        #   with:
-        #       python-version-file: ".python-version"
-
-        # - name: "Set up Python"
-        #   uses: actions/setup-python@v5
-        #   with:
-        #       python-version-file: "pyproject.toml"
+              version: "latest"
 
         - name: Set up Python ${{ matrix.python-version }}
           run: uv python install ${{ matrix.python-version }}
@@ -56,63 +44,10 @@ jobs:
           run: uv sync --all-extras --dev
 
         - name: Ruff check
-          run: uv run ruff check .
-
-        - name: Flake8  check
-          run: uv run flake8 src
+          run: uv run ruff check src tests
 
         # - name: Pylint
         #   run: uv run pylint src
 
         - name: Pyroma
           run: uv run pyroma .
-
-# jobs:
-#     run-tests:
-#         name: Python linters
-#         runs-on: ubuntu-latest
-#         timeout-minutes: 5
-
-#         steps:
-#             - uses: actions/checkout@v3
-#               with:
-#                   persist-credentials: false
-#                   fetch-depth: 0
-
-#             - name: Set up Python 3.12
-#               uses: actions/setup-python@v4
-#               with:
-#                   python-version: "3.12"
-
-#             - name: Set up Poetry
-#               run: |
-#                   pip install poetry==${{ env.POETRY_VERSION }}
-
-#             - name: Install
-#               run: |
-#                   just install
-
-#             - name: Flake8
-#               run: |
-#                   just flake8
-
-#             - name: Ruff
-#               run: |
-#                   just ruff-check
-
-#             - name: Pylint
-#               run: |
-#                   just pylint
-
-#             - name: Mypy
-#               run: |
-#                   just mypy
-
-#             - name: Pyroma
-#               run: |
-#                   just pyroma
-
-            # - name: Check poetry
-            #   run: |
-            #       just poetry-check
-            #       just poetry-lock-check

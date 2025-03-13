@@ -9,10 +9,11 @@ pre_patched_value = print
 log = logging.getLogger(__name__)
 
 
-def set_httpclient_debuglevel(debug_level=None) -> None:
-    """if http-debuglevel > 0, debug messages in the
-    http.client.HTTPConnection-class will be printed to STDOUT."""
+def set_httpclient_debuglevel(debug_level: int | str = "0") -> None:
+    """Set debug-level for http.client.
 
+    If http-debuglevel > 0, debug messages in the  http.client.HTTPConnection-class will be printed to STDOUT.
+    """
     if not debug_level:
         debug_level = os.getenv("DEBUGLEVEL_HTTPCONNECTION", "0")
 
@@ -29,16 +30,16 @@ def set_httpclient_debuglevel(debug_level=None) -> None:
 def patch_httpclient_print() -> None:
     """Patch the print-function used in http.client to use a call to log.debug() instead."""
     log_http_client = logging.getLogger("http.client")
-    http.client.print = lambda *args: log_http_client.debug(" ".join(args))  # type: ignore  # pragma: no cover
+    http.client.print = lambda *args: log_http_client.debug(" ".join(args))  # type: ignore[attr-defined]  # pragma: no cover
 
 
 def unpatch_httpclient_print() -> None:
     """Unpatch the print-function used in http.client."""
-    http.client.print = pre_patched_value  # type: ignore
+    http.client.print = pre_patched_value  # type: ignore[attr-defined]
 
 
 def configure() -> None:
-    """Configure the http.client.HTTPConnection-class
+    """Configure the http.client.HTTPConnection-class.
 
     Configure this class to use the debuglevel from an environment-variable DEBUGLEVEL_HTTPCONNECTION
     and to use a logger instead of a print-statements to output to standard output.
@@ -51,3 +52,11 @@ def undo() -> None:
     """Undo the configured steps."""
     set_httpclient_debuglevel(debug_level=0)
     unpatch_httpclient_print()
+
+
+class Foo:
+    """Test class for FOO."""
+
+    def __init__(self) -> None:
+        """Init."""
+        self._foo = "foo"

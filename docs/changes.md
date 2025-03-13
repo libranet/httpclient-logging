@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased (YYYY-MM-DD)
 
+## 1.1 (2025-03-13)
 - Remove ``httpclient_logging.patch.cancel``-function, since this is now available in ``sitecustomize-entrypoints>=1.1.0``
 
 - Depend on ``sitecustomize-entrypoints>=1.1.0``

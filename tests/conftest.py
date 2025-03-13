@@ -52,9 +52,9 @@ Usage:
 import importlib
 import logging
 import os
-import urllib3
 
 import pytest
+import urllib3
 
 import httpclient_logging
 
@@ -89,8 +89,6 @@ def url():
 def setup_logging():
     logging.basicConfig(
         encoding="utf-8",
-        # format= '[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s',
-        # datefmt='%H:%M:%S',
         level=logging.DEBUG,
         format="%(asctime)s - %(name)s - %(levelname)-7s - %(message)s",
         datefmt="%Y/%m/%d %H:%M:%S",

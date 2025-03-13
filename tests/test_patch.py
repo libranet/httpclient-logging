@@ -29,8 +29,10 @@ def test_configure():
     configure()
 
 
-def test_unpatched_httpclient_print(capsys, debuglevel_1, http, url):
+def test_unpatched_httpclient_print(capsys, debuglevel_1, http, url):  # noqa: ARG001
     from httpclient_logging.patch import set_httpclient_debuglevel, unpatch_httpclient_print
+
+    assert os.environ["DEBUGLEVEL_HTTPCONNECTION"] == "1"
 
     set_httpclient_debuglevel()
 
@@ -58,8 +60,10 @@ def test_unpatched_httpclient_print(capsys, debuglevel_1, http, url):
     assert "header: " in captured.out
 
 
-def test_patched_httpclient_print(debuglevel_1, http, url):
+def test_patched_httpclient_print(debuglevel_1, http, url):  # noqa: ARG001
     from httpclient_logging.patch import patch_httpclient_print, set_httpclient_debuglevel
+
+    assert os.environ["DEBUGLEVEL_HTTPCONNECTION"] == "1"
 
     set_httpclient_debuglevel()
 
