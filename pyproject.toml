@@ -168,7 +168,7 @@ addopts = "--junit-xml='var/coverage/pytest.xml' --cov --cov-append "
 # https://github.com/pandas-dev/pandas/blob/main/pyproject.toml
 cache-dir = "var/cache/ruff"
 line-length = 120
-target-version = "py312"
+target-version = "py38"
 
 [tool.ruff.lint]
 select = ["ALL"]

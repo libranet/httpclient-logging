@@ -4,6 +4,7 @@
 
 import logging
 import os
+import sys
 
 import freezegun
 import urllib3
@@ -133,7 +134,13 @@ def test_patched_httpclient_print(caplog, debuglevel_1, http_manager, setup_logg
         # "header: Date: Thu, 13 Mar 2025 16:13:24 GMT",
         "header: Content-Length: 1256",
         "header: Connection: keep-alive",
-        'http://example.com:80 "GET / HTTP/1.1" 200 0',
+        # 'http://example.com:80 "GET / HTTP/1.1" 200 0',  # changed in Python 3.9
     ]
+
+    if sys.version_info >= (3, 9):
+        expected_messages.append('http://example.com:80 "GET / HTTP/1.1" 200 0')
+    else:
+        expected_messages.append('http://example.com:80 "GET / HTTP/11" 200 0')
+
     for expected_message in expected_messages:
         assert expected_message in caplog.messages
