@@ -5,7 +5,6 @@ env:
     # https://github.com/pytest-dev/pytest/issues/7443
     # https://github.com/actions/runner/issues/241
     PY_COLORS: 1
-    POETRY_VERSION: "1.8.4"
 
 on:
     pull_request:
@@ -58,14 +57,14 @@ jobs:
         - name: Install the latest version of uv
           uses: astral-sh/setup-uv@v5
           with:
-              version: "latest"
               python-version: ${{ matrix.python-version }}
+              version: "latest"
 
         - name: Set up Python ${{ matrix.python-version }}
           run: uv python install ${{ matrix.python-version }}
 
         - name: Install the project
-          run: uv sync --all-extras --dev
+          run: uv sync --all-groups
 
         - name: Run tests
           run: uv run pytest tests --cov=src --cov-report html --cov-report xml --cov-report term -v
