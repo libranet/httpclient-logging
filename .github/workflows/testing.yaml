@@ -74,24 +74,13 @@ jobs:
         - name: Run tests
           run: uv run pytest tests --cov=src --cov-report html --cov-report xml --cov-report term -v
 
-
-#             - name: Install packages
-#               run: |
-#                   just install
-
-#             - name: Run tests with coverage
-#               run: |
-#                   just pytest-cov
-
-#             # https://github.com/codecov/codecov-action
-#             - name: "Upload coverage to Codecov"
-#               uses: codecov/codecov-action@v3
-#               with:
-#                   fail_ci_if_error: false # optional (default = false)
-#                   # files: var/coverage/coverage.xml, # optional
-#                   directory: var/coverage
-#                   flags: unittests # optional
-#                   token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-#                   verbose: true # optional (default = false)
-
-
+        # https://github.com/codecov/codecov-action
+        - name: "Upload coverage to Codecov"
+          uses: codecov/codecov-action@v5
+          with:
+              fail_ci_if_error: false  # optional (default = false)
+              # files: var/coverage/coverage.xml  # optional
+              directory: var/coverage
+              flags: unittests # optional
+              token: ${{ secrets.CODECOV_TOKEN }}  # not required for public repos
+              verbose: true  # optional (default = false)
