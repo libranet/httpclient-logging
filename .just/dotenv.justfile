@@ -11,7 +11,7 @@
 # cp --backup  creates .env~, but will overwrite this next time.
 # safest way, is to not overwrite existing .env-files, manual intervention needed.
 [group: 'dotenv']
-dotenv-install-from-example:
+dotenv-install-from-template:
 	@echo -e "Copying .env.template to .env" ;\
 	cp -n .env.template .env ;\
 	echo "Please review any credentials in the .env-file."
@@ -26,4 +26,4 @@ dotenv-set-basedir:
 
 # install .env-file from .env.template
 [group: 'dotenv']
-dotenv-install: dotenv-install-from-example dotenv-set-basedir
+dotenv-install: dotenv-install-from-template dotenv-set-basedir
