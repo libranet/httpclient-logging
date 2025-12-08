@@ -97,7 +97,8 @@ testing = [
 typing = [
     "lxml >=4.9",
     "mypy >= 1.13.0",
-    ]
+    "ty>=0.0.1a32",
+]
 
 
 # https://packaging.python.org/en/latest/guides/creating-and-discovering-plugins/
@@ -198,14 +199,15 @@ ignore = [
 
 [tool.uv]
 package = true
-default-groups = [
-    # "dev",
-    "docs",
-    "ipython",
-    "linting",
-    # "profiling",
-    "releasing",
-    "testing",
-    "typing",
-    # "security",
-    ]
+default-groups = "all"
+# default-groups = [
+#     "dev",
+#     "docs",
+#     "ipython",
+#     "linting",
+#     "profiling",
+#     "releasing",
+#     "security",
+#     "testing",
+#     "typing",
+#     ]
