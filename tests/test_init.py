@@ -12,14 +12,8 @@ def test_version():
     assert packaging.version.parse(__version__) >= packaging.version.parse("0.0")
 
 
-def test_copyright():
-    from httpclient_logging import __copyright__
+def test_license():
+    from httpclient_logging import __license__
 
-    assert isinstance(__copyright__, str)
-    assert "Copyright" in __copyright__
-
-
-def test_metadata():
-    from httpclient_logging import __metadata__
-
-    assert isinstance(__metadata__, dict)
+    assert isinstance(__license__, str)
+    assert "Copyright" in __license__
