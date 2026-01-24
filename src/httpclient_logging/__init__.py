@@ -1,11 +1,19 @@
 """httpclient_logging.__init__."""
 
 from httpclient_logging import patch
-from httpclient_logging._version import __copyright__, __metadata__, __version__
+from httpclient_logging.about import (
+    authors as __author__,
+)
+from httpclient_logging.about import (
+    license_ as __license__,
+)
+from httpclient_logging.about import (
+    version as __version__,
+)
 
 __all__ = [
-    "__copyright__",
-    "__metadata__",
+    "__author__",
+    "__license__",
     "__version__",
     "patch",
 ]
