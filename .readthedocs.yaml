@@ -2,7 +2,7 @@
 #
 # References:
 #  - https://docs.readthedocs.io/en/stable/config-file/v2.html for details
-#  - https://docs.readthedocs.com/platform/stable/build-customization.html
+#  - https://docs.readthedocs.com/platform/stable/build-customization.html#install-dependencies-with-uv
 #  - https://github.com/astral-sh/uv/issues/10074
 
 version: 2
@@ -10,13 +10,14 @@ version: 2
 build:
     os: ubuntu-24.04
     tools:
-        python: "3.13"
+        python: "3.14"
     jobs:
-        create_environment:
+        pre_create_environment:
             - asdf plugin add uv
             - asdf install uv latest
             - asdf global uv latest
-            - UV_PROJECT_ENVIRONMENT=$READTHEDOCS_VIRTUALENV_PATH uv sync --only-group docs --link-mode=copy
+        create_environment:
+            - UV_PROJECT_ENVIRONMENT=$READTHEDOCS_VIRTUALENV_PATH uv sync --frozen --only-group docs --link-mode=copy
         install:
             - "true"
 
