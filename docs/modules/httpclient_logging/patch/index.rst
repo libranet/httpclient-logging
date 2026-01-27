@@ -18,14 +18,6 @@ Attributes
    httpclient_logging.patch.log
 
 
-Classes
--------
-
-.. autoapisummary::
-
-   httpclient_logging.patch.Foo
-
-
 Functions
 ---------
 
@@ -45,11 +37,11 @@ Module Contents
 
 .. py:data:: log
 
-.. py:function:: set_httpclient_debuglevel(debuglevel = '0')
+.. py:function:: set_httpclient_debuglevel(debuglevel = None)
 
    Set debug-level for http.client.
 
-   If http-debuglevel > 0, debug messages in the  http.client.HTTPConnection-class will be printed to STDOUT.
+   If http-debuglevel > 0, debug messages in the http.client.HTTPConnection-class will be printed to STDOUT.
 
 
 .. py:function:: patch_httpclient_print()
@@ -73,15 +65,5 @@ Module Contents
 .. py:function:: undo()
 
    Undo the configured steps.
-
-
-.. py:class:: Foo
-
-   Test class for FOO.
-
-
-   .. py:attribute:: _foo
-      :value: 'foo'
-
 
 

@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+- Update `.pre-commit-config.yaml` with additional hooks.
+
+- Update GitHub Actions workflows with pinned versions.
+
+- Add new justfiles: bandit, gh, just, mdformat, prek, release, safety, sshx, ty, ubuntu.
+
 ## 1.2 (2025-03-13)
 
 - Remove `docs/requirements`, as we use fully uv
