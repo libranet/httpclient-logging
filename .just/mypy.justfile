@@ -1,17 +1,21 @@
-# See ../justfile
 
-# show which mypy is used
-[group: 'mypy']
-mypy-which:
-	@ which mypy
+# mypy
 
 
 # run mypy on python-files
 [group: 'mypy']
-mypy: mypy-which
-	mypy src tests
+mypy *args:
+    uv run mypy src tests {{ args }}
+
 
 # run mypy with html-reporting
 [group: 'mypy']
-mypy-report: mypy-which
-	mypy src tests --html-report  var/coverage-mypy/
+mypy-report path="var/html/mypy/" *args:
+    @ mkdir -p {{ path }}
+    uv run mypy src tests --html-report {{ path }} {{ args }}
+
+
+# alias for mypy-report
+[group: 'mypy']
+mypy-html: mypy-report
+

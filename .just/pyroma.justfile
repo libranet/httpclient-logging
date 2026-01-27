@@ -4,11 +4,10 @@
 # show which pyroma is used
 [group: 'pyroma']
 pyroma-which:
-	@ which pyroma
+    @ which pyroma
 
 
 # run pyroma
 [group: 'pyroma']
-pyroma:
-	- pyroma .
-
+pyroma *args: pyroma-which
+    - pyroma . {{args}}
