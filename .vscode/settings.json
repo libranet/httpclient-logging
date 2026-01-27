@@ -13,7 +13,10 @@
         ".env.template": "dotenv"
     },
     "files.exclude": {
-        "**/__pycache__": true
+        "**/__pycache__": true,
+        "lib/": true,
+        "lib64/": true
+
     },
     "files.trimTrailingWhitespace": true,
 
@@ -40,7 +43,6 @@
     "python.testing.pytestArgs": [
         "--color=yes",
         "--cov=src",
-        // "--cov=httpclient_logging",
         // "--cov-fail-under=90",
         // "--cov-report xml:${workspaceFolder}/var/coverage/pytest-cobertura.xml",
         // "--cov-report html:${workspaceFolder}/var/coverage/html",

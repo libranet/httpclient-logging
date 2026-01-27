@@ -1,7 +1,0 @@
-# This is a comment.
-
-# exclude generated files when 'makefile.extensionOutputFolder' is
-# not properly set to 'var/cache/vscode' in settings.json
-configurationCache.log
-dryrun.log
-targets.log
