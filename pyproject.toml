@@ -193,9 +193,9 @@ ignore = [
     "ARG001", # Unused function argument
     "D",      # Missing docstring
     "INP001", # tests-dir should not be a python-package
+    "PLC0415", # import should be at the top-level of a file
     "S101",   # Use of `assert` detected
     ]
-
 
 [tool.uv]
 package = true
