@@ -4,8 +4,29 @@
 # https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
 version: 2
+
 updates:
-  - package-ecosystem: "pip" # See documentation for possible values
-    directory: "/" # Location of package manifests
-    schedule:
-      interval: "monthly"  # daily|weekly|monthly
+
+    # supported ecosystems:
+    # https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#package-ecosystem-
+
+    # update for GitHub Actions
+    - package-ecosystem: github-actions
+      directory: "/"  # will search .github/workflows
+      labels:
+          - "dependencies"
+          - "github_actions"
+      open-pull-requests-limit: 9
+      schedule:
+          interval: "weekly"
+
+    # update uv.lock file
+    - package-ecosystem: "uv"
+      directory: "/"
+      labels:
+          - "dependencies"
+          - "python"
+          - "uv"
+      open-pull-requests-limit: 9
+      schedule:
+          interval: "monthly"
