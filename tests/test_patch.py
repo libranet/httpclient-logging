@@ -46,11 +46,11 @@ def test_configure():
 
     configure()
     assert http.client.HTTPConnection.debuglevel == 1
-    assert http.client.print.__name__ == "<lambda>"
+    assert http.client.print.__name__ == "<lambda>"  # type: ignore[attr-defined]
 
     undo()
     assert http.client.HTTPConnection.debuglevel == 0
-    assert http.client.print.__name__ == "print"
+    assert http.client.print.__name__ == "print"  # type: ignore[attr-defined]
 
 
 def test_unpatched_httpclient_print(capsys, debuglevel_1, http_manager, url):
