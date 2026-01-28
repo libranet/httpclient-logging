@@ -7,18 +7,23 @@ The package must be properly installed in order the metadata to be available.
 
 from __future__ import annotations
 
-import importlib.metadata
+import sys
 
-package: str = __package__ or ""
+if sys.version_info >= (3, 10):
+    import importlib.metadata as importlib_metadata
+else:
+    import importlib_metadata  # ty:ignore[unresolved-import]
+
+PACKAGE: str = __package__ or ""
 
 
 try:
-    msg = importlib.metadata.metadata(package)
-    pkginfo: dict[str, str | list[str]] = msg.json  # ty: ignore[unresolved-attribute]
+    msg = importlib_metadata.metadata(PACKAGE)
+    pkginfo: dict[str, str | list[str]] = msg.json
 except ValueError:
     # A distribution name is required. __package__ is None
     pkginfo = {}
-except importlib.metadata.PackageNotFoundError:  # pragma: no cover
+except importlib_metadata.PackageNotFoundError:  # pragma: no cover
     # fallback if this package is not properly installed
     pkginfo = {}
 

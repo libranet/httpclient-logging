@@ -46,6 +46,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
+    "importlib-metadata >= 7.0; python_version < '3.10'",
     "sitecustomize-entrypoints >= 1.1.0",
 ]
 
@@ -163,12 +164,12 @@ good-names = [
 
 [tool.pylint.messages_control]
 disable = [
-    "C0116", # missing-function-docstring
+    "C0116",  # missing-function-docstring
 ]
 
 [tool.pytest.ini_options]
 cache_dir = "var/cache/pytest"
-log_cli = false                   # enable to show log-output
+log_cli = false  # enable to show log-output
 log_cli_level = "NOTSET"
 filterwarnings = []
 markers = ["unit", "integration"]
@@ -182,7 +183,7 @@ addopts = "--junit-xml='var/coverage/pytest.xml' --cov --cov-append "
 # https://github.com/pandas-dev/pandas/blob/main/pyproject.toml
 cache-dir = "var/cache/ruff"
 line-length = 120
-target-version = "py38"
+target-version = "py39"
 
 [tool.ruff.lint]
 select = ["ALL"]
@@ -216,14 +217,3 @@ force-single-line = false
 [tool.uv]
 package = true
 default-groups = "all"
-# default-groups = [
-#     "dev",
-#     "docs",
-#     "ipython",
-#     "linting",
-#     "profiling",
-#     "releasing",
-#     "security",
-#     "testing",
-#     "typing",
-#     ]
