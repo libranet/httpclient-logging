@@ -210,14 +210,19 @@ ignore = [
     "PLC0415", # import should be at the top-level of a file
     "S101",   # Use of `assert` detected
     ]
+"examples/**" = [
+    "INP001", # examples-dir should not be a python-package
+    "S310",   # Audit URL open for permitted schemes
+    "T201",   # print found
+    ]
 
 [tool.ruff.lint.isort]
 force-single-line = false
 
-[tool.ty.lint]
+[tool.ty.rules]
 # Needed because importlib_metadata is only installed on Python < 3.10,
 # but we need ty:ignore for when ty runs on Python >= 3.10
-ignore = ["unused-ignore-comment"]
+unused-ignore-comment = "ignore"
 
 
 [tool.uv]

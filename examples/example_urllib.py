@@ -8,7 +8,7 @@
 # ]
 # ///
 
-"""Demo requests usage."""
+"""Demo urllib usage."""
 
 import json
 import logging
