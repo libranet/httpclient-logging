@@ -10,7 +10,7 @@ def test_import_sitecustomize() -> None:
         import sitecustomize  # noqa: F401
     except ImportError:
         # package sitecustomize-entrypoints is not installed
-        pytest.fail(reason="Can not import sitecustomize. Package sitecustomize-entrypoints not installed?")
+        pytest.fail("Can not import sitecustomize. Package sitecustomize-entrypoints not installed?")
 
 
 def test_entrypoint_registration() -> None:
