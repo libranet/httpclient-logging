@@ -121,7 +121,6 @@ def url():
 @pytest.fixture
 def setup_logging():
     logging.basicConfig(
-        encoding="utf-8",
         level=logging.DEBUG,
         format="%(asctime)s - %(name)s - %(levelname)-7s - %(message)s",
         datefmt="%Y/%m/%d %H:%M:%S",
