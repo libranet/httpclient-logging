@@ -19,7 +19,7 @@ PACKAGE: str = __package__ or ""
 
 try:
     msg = importlib_metadata.metadata(PACKAGE)
-    pkginfo: dict[str, str | list[str]] = msg.json
+    pkginfo: dict[str, str | list[str]] = msg.json if msg else {}
 except ValueError:
     # A distribution name is required. __package__ is None
     pkginfo = {}
