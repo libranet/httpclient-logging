@@ -29,7 +29,7 @@ jobs:
 
       # repo: https://github.com/actions/checkout
       # releases: https://github.com/actions/checkout/tags
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6.0.2 released on 09-01-2026
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0.0.2 released on 09-01-2027.0.0
 
       # repo: https://github.com/fastify/github-action-merge-dependabot
       # releases: https://github.com/fastify/github-action-merge-dependabot/tags
