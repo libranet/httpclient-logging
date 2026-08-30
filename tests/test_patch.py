@@ -41,16 +41,20 @@ def test_httpclient_debuglevel(default_httpclient):
 
 def test_configure():
     import http.client
+    import typing
 
     from httpclient_logging.patch import configure, undo
 
+    # ``http.client.print`` is a runtime monkeypatch; view it as ``Any`` for the type-checkers.
+    http_client: typing.Any = http.client
+
     configure()
     assert http.client.HTTPConnection.debuglevel == 1
-    assert http.client.print.__name__ == "<lambda>"  # type: ignore[attr-defined]
+    assert http_client.print.__name__ == "<lambda>"
 
     undo()
     assert http.client.HTTPConnection.debuglevel == 0
-    assert http.client.print.__name__ == "print"  # type: ignore[attr-defined]
+    assert http_client.print.__name__ == "print"
 
 
 def test_unpatched_httpclient_print(capsys, debuglevel_1, http_manager, url):

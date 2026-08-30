@@ -189,6 +189,7 @@ target-version = "py39"
 select = ["ALL"]
 ignore = [
     "B011",   # Do not call assert False since python -O removes these calls.
+    "CPY001", # Missing copyright notice at top of file
     "ERA001", # Found commented-out code
     "G004",   # Logging statement uses f-string
     "RET504", # Unnecessary assignment before `return` statement
