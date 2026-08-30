@@ -102,47 +102,25 @@ def test_patched_httpclient_print(caplog, debuglevel_1, http_manager, setup_logg
 
     with freezegun.freeze_time("2023-01-01"):
         _ = http_manager.request("GET", url, timeout=3)
-    # 2023-03-04 11:24:17,109 - urllib3.connectionpool - DEBUG   - Starting new HTTP connection (1): example.com:80
-    # 2023-03-04 11:24:17,225 - http.client - DEBUG   - send: b'GET / HTTP/1.1\r\nHost: example.com\r\n
-    #     Accept-Encoding: identity\r\nUser-Agent: python-urllib3/1.26.14\r\n\r\n'
-    # 2023-03-04 11:24:17,335 - http.client - DEBUG   - reply: 'HTTP/1.1 200 OK\r\n'
-    # 2023-03-04 11:24:17,337 - http.client - DEBUG   - header: Accept-Ranges: bytes
-    # 2023-03-04 11:24:17,338 - http.client - DEBUG   - header: Age: 167713
-    # 2023-03-04 11:24:17,338 - http.client - DEBUG   - header: Cache-Control: max-age=604800
-    # 2023-03-04 11:24:17,339 - http.client - DEBUG   - header: Content-Type: text/html; charset=UTF-8
-    # 2023-03-04 11:24:17,340 - http.client - DEBUG   - header: Date: Sat, 04 Mar 2023 10:24:20 GMT
-    # 2023-03-04 11:24:17,340 - http.client - DEBUG   - header: Etag: "3147526947"
-    # 2023-03-04 11:24:17,340 - http.client - DEBUG   - header: Expires: Sat, 11 Mar 2023 10:24:20 GMT
-    # 2023-03-04 11:24:17,341 - http.client - DEBUG   - header: Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
-    # 2023-03-04 11:24:17,341 - http.client - DEBUG   - header: Server: ECS (dcb/7FA3)
-    # 2023-03-04 11:24:17,342 - http.client - DEBUG   - header: Vary: Accept-Encoding
-    # 2023-03-04 11:24:17,342 - http.client - DEBUG   - header: X-Cache: HIT
-    # 2023-03-04 11:24:17,342 - http.client - DEBUG   - header: Content-Length: 1256
-    # 2023-03-04 11:24:17,343 - urllib3.connectionpool - DEBUG   - http://example.com:80 "GET / HTTP/1.1" 200 1256
 
-    expected_messages = [
-        "Setting http.client.HTTPConnection.debuglevel to 1",
-        "Starting new HTTP connection (1): example.com:80",
-        (
-            "send: b'GET / HTTP/1.1\\r\\nHost: example.com\\r\\nAccept-Encoding: identity\\r\\nUser-Agent: "
-            f"python-urllib3/{urllib3.__version__}\\r\\n\\r\\n'"
-        ),
-        "reply: 'HTTP/1.1 200 OK\\r\\n'",
-        "header: Content-Type: text/html",
-        # 'header: ETag: "84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
-        # "header: Last-Modified: Mon, 13 Jan 2025 20:11:20 GMT",
-        "header: Vary: Accept-Encoding",
-        # "header: Cache-Control: max-age=2239",
-        # "header: Date: Thu, 13 Mar 2025 16:13:24 GMT",
-        # "header: Content-Length: 1256",
-        "header: Connection: keep-alive",
-        # 'http://example.com:80 "GET / HTTP/1.1" 200 0',  # changed in Python 3.9
-    ]
+    # The patched ``print`` routes every ``http.client`` debug line through ``log.debug``,
+    # so each line shows up verbatim in ``caplog.messages``. Assert on the parts that a
+    # live ``GET http://example.com`` always produces; header *values* (Date, Server, ...)
+    # depend on whatever CDN fronts the site, so only their stable prefixes are checked.
+    messages = caplog.messages
+    joined = "\n".join(messages)
 
-    # if sys.version_info >= (3, 9):
-    #     expected_messages.append('http://example.com:80 "GET / HTTP/1.1" 200 0')
-    # else:
-    #     expected_messages.append('http://example.com:80 "GET / HTTP/11" 200 0')
+    assert "Setting http.client.HTTPConnection.debuglevel to 1" in messages
+    assert "Starting new HTTP connection (1): example.com:80" in messages
+    assert (
+        "send: b'GET / HTTP/1.1\\r\\nHost: example.com\\r\\nAccept-Encoding: identity\\r\\n"
+        f"User-Agent: python-urllib3/{urllib3.__version__}\\r\\n\\r\\n'"
+    ) in messages
+    assert "reply: 'HTTP/1.1 200 OK\\r\\n'" in messages
 
-    for expected_message in expected_messages:
-        assert expected_message in caplog.messages
+    # header lines: logged one per line, "header: <name>: <value>"
+    assert "header: Date: " in joined
+    assert "header: Content-Type: text/html" in joined
+
+    # urllib3 connectionpool summary (trailing body length is an int or "None")
+    assert 'http://example.com:80 "GET / HTTP/1.1" 200 ' in joined
