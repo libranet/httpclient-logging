@@ -5,6 +5,14 @@ from __future__ import annotations
 import http.client
 import logging
 import os
+import typing
+
+# ``http.client`` emits its debug output through the module-global name ``print``.
+# Both ``patch_httpclient_print`` and ``unpatch_httpclient_print`` rebind that name
+# at runtime (a monkeypatch). The typed ``http.client`` module exposes no ``print``
+# attribute, so route the rebinding through an ``Any`` view to keep mypy and ty quiet
+# without sprinkling per-line ignores.
+_http_client: typing.Any = http.client
 
 pre_patched_value = print
 
@@ -32,12 +40,12 @@ def set_httpclient_debuglevel(debuglevel: int | str | None = None) -> None:
 def patch_httpclient_print() -> None:
     """Patch the print-function used in http.client to use a call to log.debug() instead."""
     log_http_client = logging.getLogger("http.client")
-    http.client.print = lambda *args: log_http_client.debug(" ".join(args))  # type: ignore[attr-defined]
+    _http_client.print = lambda *args: log_http_client.debug(" ".join(args))
 
 
 def unpatch_httpclient_print() -> None:
     """Unpatch the print-function used in http.client."""
-    http.client.print = pre_patched_value  # type: ignore[attr-defined]
+    _http_client.print = pre_patched_value
 
 
 def configure() -> None:
