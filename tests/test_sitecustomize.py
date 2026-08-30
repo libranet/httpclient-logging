@@ -2,15 +2,14 @@
 # pylint: disable=missing-function-docstring
 """Testing of module sitecustomize."""
 
-import pytest
-
 
 def test_import_sitecustomize() -> None:
     try:
         import sitecustomize  # noqa: F401
-    except ImportError:
+    except ImportError as exc:
         # package sitecustomize-entrypoints is not installed
-        pytest.fail("Can not import sitecustomize. Package sitecustomize-entrypoints not installed?")
+        msg = "Can not import sitecustomize. Package sitecustomize-entrypoints not installed?"
+        raise AssertionError(msg) from exc
 
 
 def test_entrypoint_registration() -> None:
