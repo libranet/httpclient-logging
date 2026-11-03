@@ -2,5 +2,54 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "labels": [
+    "dependencies"
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "* 0-3 1 * *"
+    ]
+  },
+  "packageRules": [
+    {
+      "description": "Label GitHub Actions updates",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "addLabels": [
+        "github_actions"
+      ]
+    },
+    {
+      "description": "Label Python dependency updates",
+      "matchManagers": [
+        "pep621"
+      ],
+      "addLabels": [
+        "python",
+        "uv"
+      ]
+    },
+    {
+      "description": "Auto-merge minor and patch updates once all checks pass (replaces the Dependabot auto-merge workflow)",
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash",
+      "platformAutomerge": false
+    },
+    {
+      "description": "myst-parser >= 5 requires Python >= 3.11; keep the pin for Python < 3.10 as is",
+      "matchPackageNames": [
+        "myst-parser"
+      ],
+      "matchCurrentValue": "/< 4\\.0/",
+      "enabled": false
+    }
   ]
 }
