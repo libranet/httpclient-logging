@@ -230,16 +230,16 @@ gh-browse-wiki:
     gh browse --wiki
 
 
-# list dependabot PRs
+# list renovate PRs
 [group: 'gh']
-gh-pr-list-dependabot limit="10":
-    gh pr list --author app/dependabot --limit {{limit}}
+gh-pr-list-renovate limit="10":
+    gh pr list --author app/renovate --limit {{limit}}
 
 
-# list all dependabot PRs (including closed)
+# list all renovate PRs (including closed)
 [group: 'gh']
-gh-pr-list-dependabot-all limit="20":
-    gh pr list --state all --author app/dependabot --limit {{limit}}
+gh-pr-list-renovate-all limit="20":
+    gh pr list --state all --author app/renovate --limit {{limit}}
 
 
 # view GitHub Actions usage (billing)
