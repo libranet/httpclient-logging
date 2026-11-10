@@ -1506,7 +1506,7 @@ dependencies = [
     { name = "matplotlib-inline", version = "0.2.2", source = { registry = "https://pypi.org/simple" } },
     { name = "pexpect", marker = "sys_platform != 'win32'" },
     { name = "prompt-toolkit", version = "3.0.52", source = { registry = "https://pypi.org/simple" } },
-    { name = "pygments", version = "2.20.0", source = { registry = "https://pypi.org/simple" } },
+    { name = "pygments", version = "2.21.0", source = { registry = "https://pypi.org/simple" } },
     { name = "stack-data" },
     { name = "traitlets", version = "5.15.1", source = { registry = "https://pypi.org/simple" } },
     { name = "typing-extensions", version = "4.16.0", source = { registry = "https://pypi.org/simple" } },
@@ -1531,7 +1531,7 @@ dependencies = [
     { name = "matplotlib-inline", version = "0.2.2", source = { registry = "https://pypi.org/simple" } },
     { name = "pexpect", marker = "sys_platform != 'emscripten' and sys_platform != 'win32'" },
     { name = "prompt-toolkit", version = "3.0.53", source = { registry = "https://pypi.org/simple" } },
-    { name = "pygments", version = "2.20.0", source = { registry = "https://pypi.org/simple" } },
+    { name = "pygments", version = "2.21.0", source = { registry = "https://pypi.org/simple" } },
     { name = "stack-data" },
     { name = "traitlets", version = "5.16.1", source = { registry = "https://pypi.org/simple" } },
     { name = "typing-extensions", version = "4.16.0", source = { registry = "https://pypi.org/simple" } },
@@ -1558,7 +1558,7 @@ dependencies = [
     { name = "pexpect", marker = "sys_platform != 'emscripten' and sys_platform != 'win32'" },
     { name = "prompt-toolkit", version = "3.0.53", source = { registry = "https://pypi.org/simple" } },
     { name = "psutil", marker = "sys_platform != 'cygwin' and sys_platform != 'emscripten'" },
-    { name = "pygments", version = "2.20.0", source = { registry = "https://pypi.org/simple" } },
+    { name = "pygments", version = "2.21.0", source = { registry = "https://pypi.org/simple" } },
     { name = "stack-data" },
     { name = "traitlets", version = "5.16.1", source = { registry = "https://pypi.org/simple" } },
     { name = "typing-extensions", version = "4.16.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
@@ -1573,7 +1573,7 @@ name = "ipython-pygments-lexers"
 version = "1.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pygments", version = "2.20.0", source = { registry = "https://pypi.org/simple" } },
+    { name = "pygments", version = "2.21.0", source = { registry = "https://pypi.org/simple" } },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/ef/4c/5dd1d8af08107f88c7f741ead7a40854b8ac24ddf9ae850afbcf698aa552/ipython_pygments_lexers-1.1.1.tar.gz", hash = "sha256:09c0138009e56b6854f9535736f4171d855c8c08a563a0dcd8022f78355c7e81", size = 8393, upload-time = "2025-01-17T11:24:34.505Z" }
 wheels = [
@@ -3156,7 +3156,7 @@ wheels = [
 
 [[package]]
 name = "pygments"
-version = "2.20.0"
+version = "2.21.0"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "python_full_version >= '3.15'",
@@ -3165,9 +3165,9 @@ resolution-markers = [
     "python_full_version == '3.10.*'",
     "python_full_version == '3.9.*'",
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c3/b2/bc9c9196916376152d655522fdcebac55e66de6603a76a02bca1b6414f6c/pygments-2.20.0.tar.gz", hash = "sha256:6757cd03768053ff99f3039c1a36d6c0aa0b263438fcab17520b30a303a82b5f", size = 4955991, upload-time = "2026-03-29T13:29:33.898Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/49/2e/ced460408999b33da6b31b0021b0f37d329e202d4169aeb164493778f25b/pygments-2.21.0.tar.gz", hash = "sha256:610ca751c9bc2492b38eb9a38a7fbc93edbbb2d7182edaf34e66ae493dee5c8c", size = 5005329, upload-time = "2026-08-17T08:02:48.824Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f4/7e/a72dd26f3b0f4f2bf1dd8923c85f7ceb43172af56d63c7383eb62b332364/pygments-2.20.0-py3-none-any.whl", hash = "sha256:81a9e26dd42fd28a23a2d169d86d7ac03b46e2f8b59ed4698fb4785f946d0176", size = 1231151, upload-time = "2026-03-29T13:29:30.038Z" },
+    { url = "https://files.pythonhosted.org/packages/71/46/17f022dd3e953bf20a04a028a21ec746d942f8d2af30fa0f124fa0e6a684/pygments-2.21.0-py3-none-any.whl", hash = "sha256:2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9", size = 1250147, upload-time = "2026-08-17T08:02:44.912Z" },
 ]
 
 [[package]]
@@ -3287,7 +3287,7 @@ dependencies = [
     { name = "build", version = "1.5.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
     { name = "docutils", version = "0.21.2", source = { registry = "https://pypi.org/simple" } },
     { name = "packaging", version = "26.3", source = { registry = "https://pypi.org/simple" } },
-    { name = "pygments", version = "2.20.0", source = { registry = "https://pypi.org/simple" } },
+    { name = "pygments", version = "2.21.0", source = { registry = "https://pypi.org/simple" } },
     { name = "requests", version = "2.32.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "requests", version = "2.34.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
     { name = "setuptools", version = "82.0.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
@@ -3332,7 +3332,7 @@ dependencies = [
     { name = "iniconfig", version = "2.1.0", source = { registry = "https://pypi.org/simple" } },
     { name = "packaging", version = "26.3", source = { registry = "https://pypi.org/simple" } },
     { name = "pluggy", version = "1.6.0", source = { registry = "https://pypi.org/simple" } },
-    { name = "pygments", version = "2.20.0", source = { registry = "https://pypi.org/simple" } },
+    { name = "pygments", version = "2.21.0", source = { registry = "https://pypi.org/simple" } },
     { name = "tomli" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/a3/5c/00a0e072241553e1a7496d638deababa67c5058571567b92a7eaa258397c/pytest-8.4.2.tar.gz", hash = "sha256:86c0d0b93306b961d58d62a4db4879f27fe25513d4b969df351abdddb3c30e01", size = 1519618, upload-time = "2025-09-04T14:34:22.711Z" }
@@ -3356,7 +3356,7 @@ dependencies = [
     { name = "iniconfig", version = "2.3.0", source = { registry = "https://pypi.org/simple" } },
     { name = "packaging", version = "26.3", source = { registry = "https://pypi.org/simple" } },
     { name = "pluggy", version = "1.6.0", source = { registry = "https://pypi.org/simple" } },
-    { name = "pygments", version = "2.20.0", source = { registry = "https://pypi.org/simple" } },
+    { name = "pygments", version = "2.21.0", source = { registry = "https://pypi.org/simple" } },
     { name = "tomli", marker = "python_full_version < '3.11'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/79/42/bb4641652e58dedeac2ec51abc1f8cae4fee4ec63899a0999016229a0f2a/pytest-9.2.0.tar.gz", hash = "sha256:97c4f3b1f3c7414aa36465e09b8220f1d03627993bd51b1282e193753c80557b", size = 1797555, upload-time = "2026-10-27T21:30:20.728Z" }
@@ -3747,7 +3747,7 @@ resolution-markers = [
 ]
 dependencies = [
     { name = "markdown-it-py" },
-    { name = "pygments", version = "2.20.0", source = { registry = "https://pypi.org/simple" } },
+    { name = "pygments", version = "2.21.0", source = { registry = "https://pypi.org/simple" } },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/c0/8f/0722ca900cc807c13a6a0c696dacf35430f72e0ec571c4275d2371fca3e9/rich-15.0.0.tar.gz", hash = "sha256:edd07a4824c6b40189fb7ac9bc4c52536e9780fbbfbddf6f1e2502c31b068c36", size = 230680, upload-time = "2026-04-12T08:24:00.75Z" }
 wheels = [
@@ -4523,7 +4523,7 @@ dependencies = [
     { name = "importlib-metadata", version = "8.7.1", source = { registry = "https://pypi.org/simple" } },
     { name = "jinja2" },
     { name = "packaging", version = "26.3", source = { registry = "https://pypi.org/simple" } },
-    { name = "pygments", version = "2.20.0", source = { registry = "https://pypi.org/simple" } },
+    { name = "pygments", version = "2.21.0", source = { registry = "https://pypi.org/simple" } },
     { name = "requests", version = "2.32.5", source = { registry = "https://pypi.org/simple" } },
     { name = "snowballstemmer" },
     { name = "sphinxcontrib-applehelp", version = "2.0.0", source = { registry = "https://pypi.org/simple" } },
@@ -4554,7 +4554,7 @@ dependencies = [
     { name = "imagesize", version = "2.0.0", source = { registry = "https://pypi.org/simple" } },
     { name = "jinja2" },
     { name = "packaging", version = "26.3", source = { registry = "https://pypi.org/simple" } },
-    { name = "pygments", version = "2.20.0", source = { registry = "https://pypi.org/simple" } },
+    { name = "pygments", version = "2.21.0", source = { registry = "https://pypi.org/simple" } },
     { name = "requests", version = "2.34.2", source = { registry = "https://pypi.org/simple" } },
     { name = "snowballstemmer" },
     { name = "sphinxcontrib-applehelp", version = "2.0.0", source = { registry = "https://pypi.org/simple" } },
@@ -4587,7 +4587,7 @@ dependencies = [
     { name = "imagesize", version = "2.0.0", source = { registry = "https://pypi.org/simple" } },
     { name = "jinja2" },
     { name = "packaging", version = "26.3", source = { registry = "https://pypi.org/simple" } },
-    { name = "pygments", version = "2.20.0", source = { registry = "https://pypi.org/simple" } },
+    { name = "pygments", version = "2.21.0", source = { registry = "https://pypi.org/simple" } },
     { name = "requests", version = "2.34.2", source = { registry = "https://pypi.org/simple" } },
     { name = "roman-numerals-py" },
     { name = "snowballstemmer" },
